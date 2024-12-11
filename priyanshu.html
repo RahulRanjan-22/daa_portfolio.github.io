@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Learning Reflections</title>
+    <style>
+        /* Base styles for body and text */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Container for centering the content */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Header styles */
+        h1, h2 {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1abc9c;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #1abc9c;
+            padding-bottom: 5px;
+        }
+
+        /* Section styling */
+        section {
+            margin-bottom: 25px;
+        }
+
+        p, ul {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 30px;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1rem;
+            color: #aaa;
+        }
+
+        /* Soft hover effect for list items */
+        ul li:hover {
+            color: #16a085;
+            cursor: pointer;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>COURSE LEARNING REFLECTIONS</h1>
+
+        <section>
+            <h2>1. Kinds of Problems Seen in Nature</h2>
+            <p>Nature is a beautiful and fascinating space that shows an array of problems and patterns. From nature, computational terminologies like iteration, recursion, and backtracking are derived:</p>
+            <ul>
+                <li><strong>Iteration:</strong> Seasonal changes, wave motion, and bird migration show repetitive patterns. Computationally, this is represented as loops like for and while.</li>
+                <li><strong>Recursion:</strong> Examples include the growth of sunflowers and predator-prey systems, where a larger problem's solution depends on smaller problems (e.g., Fibonacci series).</li>
+                <li><strong>Backtracking:</strong> Pathfinding in ants demonstrates finding paths by trial and error. Computational applications include solving Sudoku and maze puzzles.</li>
+            </ul>
+            <p>All these techniques combined explain how bees find optimal flower patches.</p>
+        </section>
+
+        <section>
+            <h2>2. Space and Time Efficiency</h2>
+            <p><strong>Space efficiency:</strong> Refers to the additional memory required by an algorithm.</p>
+            <p><strong>Time efficiency:</strong> Refers to the total time taken by an algorithm to run as a function of the input length.</p>
+            <p>Importance:</p>
+            <ul>
+                <li>Time efficiency saves computational time, crucial for real-time applications.</li>
+                <li>Space efficiency is vital for devices with limited memory.</li>
+            </ul>
+            <p><strong>Orders of Growth:</strong></p>
+            <ul>
+                <li>O(1): Constant time.</li>
+                <li>O(log n): Logarithmic growth (e.g., binary search).</li>
+                <li>O(n): Linear growth (e.g., simple loops).</li>
+                <li>O(n²): Quadratic growth (e.g., nested loops).</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>3. Takeaway from Design Principles</h2>
+            <p>Various design principles give an idea that even though every design principle has been developed with the intention of optimizing the problem, using it appropriately for a particular problem is necessary. For example, ‘Pruning’ is very well suited for the N-Queens problem, while using ‘Parental dominance’ makes no sense. ‘Bit manipulation’ is used in Fenwick trees, whereas ‘Edge relaxation’ is used in spanning trees. Interchanging these principles complicates the problems. Hence, choosing the appropriate principle makes it efficient.</p>
+        </section>
+
+        <section>
+            <h2>4. Hierarchical Data and Tree Structures</h2>
+            <p>Hierarchical data structures organize data in parent-child relationships:</p>
+            <ul>
+                <li><strong>2-3 Tree:</strong> Used in file systems.</li>
+                <li><strong>Heap:</strong> Satisfies tree shape and parental dominance.</li>
+                <li><strong>Trie:</strong> Efficient for prefix-based text searches.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>5. Array Query Algorithms</h2>
+            <p>Array query algorithms are essential for efficiently retrieving, modifying, or analyzing data stored in arrays. They address common operations such as searching, range queries, and optimization problems:</p>
+            <ul>
+                <li><strong>Segment Tree:</strong> Divides the array into segments and stores results for each segment.</li>
+                <li><strong>Fenwick Tree:</strong> Represents the array of elements using a binary tree structure, where each node stores the cumulative frequency of a specific range of elements.</li>
+                <li><strong>Sparse Table:</strong> Precomputes answers for range queries.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>6. Differentiation Between Trees and Graphs</h2>
+            <ul>
+                <li><strong>Tree:</strong> A hierarchical structure with nodes connected by edges, and no cycles. Every node (except the root) has exactly one parent.</li>
+                <li><strong>Graph:</strong> A collection of nodes connected by edges, which may have cycles. Can be cyclic/acyclic, directed/undirected, and connected/disconnected.</li>
+            </ul>
+            <p><strong>Traversals:</strong> Tree traversals include preorder, inorder, and postorder with one root node, followed by the left and right subtrees. Graph traversals include breadth-first search (BFS) using a queue and depth-first search (DFS) using a stack.</p>
+        </section>
+
+        <section>
+            <h2>7. Sorting and Searching Algorithms</h2>
+            <ul>
+                <li><strong>Bubble Sort:</strong> Repeatedly swaps adjacent elements if they are in the wrong order.</li>
+                <li><strong>Selection Sort:</strong> Selects the smallest element and places it at the beginning of the unsorted section.</li>
+                <li><strong>Merge Sort:</strong> Divide-and-conquer approach; splits the array, sorts each half, and merges them.</li>
+                <li><strong>Quick Sort:</strong> Divide-and-conquer; partitions the array around a pivot and recursively sorts partitions.</li>
+                <li><strong>Heap Sort:</strong> Builds a max-heap and extracts the largest element repeatedly.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>8. Importance of Graph Algorithms</h2>
+            <p>Graph algorithms for spanning trees and shortest paths are vital in optimizing real-world problems. Spanning tree algorithms (like Kruskal’s and Prim’s) ensure efficient network design, minimizing cost while connecting all nodes. Shortest path algorithms (such as Dijkstra’s, Bellman-Ford, and A*) find optimal paths in weighted graphs, essential for navigation, routing, and logistics. These algorithms are foundational in telecommunications, transportation, logistics, social networks, and AI.</p>
+        </section>
+
+        <section>
+            <h2>9. Algorithm Design Techniques</h2>
+            <ul>
+                <li><strong>Boyer-Moore:</strong> Greedy string-searching algorithm designed to find a substring in a main string by processing the pattern from right to left.</li>
+                <li><strong>KMP:</strong> Efficient string matching algorithm that avoids unnecessary re-evaluation by preprocessing the pattern and utilizing partial matching information.</li>
+                <li><strong>Rabin-Karp:</strong> Uses hashing to find all occurrences of a pattern in a text.</li>
+                <li><strong>Dijkstra's:</strong> Finds the shortest path from a source vertex to all other vertices in a weighted graph with non-negative edge weights.</li>
+                <li><strong>Floyd-Warshall:</strong> Computes shortest paths between all pairs of vertices in a weighted graph.</li>
+                <li><strong>Kruskal's:</strong> A greedy algorithm to find the minimum spanning tree (MST) of a graph.</li>
+                <li><strong>Prim's:</strong> A greedy algorithm to find the minimum spanning tree (MST), similar to Kruskal’s but it grows the MST one vertex at a time.</li>
+            </ul>
+        </section>
+    </div>
+    <footer>
+        &copy; 2024 Course Learning Reflections
+    </footer>
+</body>
+</html>
