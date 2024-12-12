@@ -5,93 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Learning Reflections</title>
     <style>
-        /* Base styles for body and text */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            background-color: #f5efe6;
-            color: #4b3832;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #333;
             margin: 0;
             padding: 0;
         }
-        
-        /* Container for centering the content */
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        /* Header styles */
         h1, h2 {
-            font-weight: 600;
-            color: #6d4c41;
-        }
-
-        h1 {
-            font-size: 2.5rem;
             text-align: center;
-            margin-bottom: 20px;
-            color: #a0522d;
+            color: #2c3e50;
         }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            border-bottom: 3px solid #a0522d;
-            padding-bottom: 5px;
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
-        /* Section styling */
         section {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
-
         p, ul {
-            margin: 15px 0;
-            font-size: 1.1rem;
-            color: #5d4037;
+            margin: 10px 0;
+            padding-left: 20px;
         }
-
         ul {
-            list-style-type: disc;
-            padding-left: 30px;
+            list-style-type: square;
         }
-
-        li {
-            margin: 5px 0;
-        }
-
         footer {
             text-align: center;
-            margin-top: 30px;
-            font-size: 1rem;
-            color: #7f6a62;
-        }
-
-        /* Soft hover effect for list items */
-        ul li:hover {
-            color: #d2691e;
-            cursor: pointer;
-        }
-
-        /* Responsive design for smaller screens */
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.6rem;
-            }
+            margin: 20px 0;
+            font-size: 0.9rem;
+            color: #555;
         }
     </style>
 </head>
@@ -130,13 +78,25 @@
 
         <section>
             <h2>3. Takeaway from Design Principles</h2>
-            <p>Various design principles give an idea that even though every design principle has been developed with the intention of optimizing the problem, using it appropriately for a particular problem is necessary. For example, ‘Pruning’ is very well suited for the N-Queens problem, while using ‘Parental dominance’ makes no sense. ‘Bit manipulation’ is used in Fenwick trees, whereas ‘Edge relaxation’ is used in spanning trees. Interchanging these principles complicates the problems. Hence, choosing the appropriate principle makes it efficient.</p>
+           <p>Various design principles gives a idea that even if every design principle has been 
+            developed with the intention of optimizing the problem,using it appropriately for a 
+            particular problem is very necessary.
+            For example ‘Pruning’ is very well suited for N-Queens problem and using ‘Parental
+             dominance’ makes no sense.
+            ‘Bit manipulation’ was used in Fenwick trees whereas ‘Edge relaxation’ was used
+             in spanning trees. Interchanging these principles only complicates the problems.
+             Hence choosing the appropriate principle makes it efficient.</p>
         </section>
 
         <section>
             <h2>4. Hierarchical Data and Tree Structures</h2>
             <p>Hierarchical data structures organize data in parent-child relationships:</p>
             <ul>
+                <p>Hierarchical data represents relationships in a parent-child manner, forming a structure 
+                    like a tree.to further optimize this genral tree we introduce binary search tree(bst) which 
+                    optimizes its search having left child smaller then the right child.to remove the schewness
+                    created in a bst we introduce avl tree.and to further optimize the avl tree we came with 
+                    red black tree.</p>
                 <li><strong>2-3 Tree:</strong> Used in file systems.</li>
                 <li><strong>Heap:</strong> Satisfies tree shape and parental dominance.</li>
                 <li><strong>Trie:</strong> Efficient for prefix-based text searches.</li>
@@ -145,10 +105,14 @@
 
         <section>
             <h2>5. Array Query Algorithms</h2>
-            <p>Array query algorithms are essential for efficiently retrieving, modifying, or analyzing data stored in arrays. They address common operations such as searching, range queries, and optimization problems:</p>
+            <p>Array query algorithms are essential for efficiently 
+                retrieving, modifying, or analyzing data stored in arrays.they address common operations
+                such as searching,range queries,optimization problems etc.
+                :</p>
             <ul>
-                <li><strong>Segment Tree:</strong> Divides the array into segments and stores results for each segment.</li>
-                <li><strong>Fenwick Tree:</strong> Represents the array of elements using a binary tree structure, where each node stores the cumulative frequency of a specific range of elements.</li>
+                <li><strong>Segment Tree:</strong> Divides the array into segments and store results for each segment..</li>
+                <li><strong>Fenwick Tree:</strong> represent the array of elements using a binary tree structure, 
+                    where each node stores the cumulative frequency of a specific range of elements</li>
                 <li><strong>Sparse Table:</strong> Precomputes answers for range queries.</li>
             </ul>
         </section>
@@ -156,38 +120,82 @@
         <section>
             <h2>6. Differentiation Between Trees and Graphs</h2>
             <ul>
-                <li><strong>Tree:</strong> A hierarchical structure with nodes connected by edges, and no cycles. Every node (except the root) has exactly one parent.</li>
-                <li><strong>Graph:</strong> A collection of nodes connected by edges, which may have cycles. Can be cyclic/acyclic, directed/undirected, and connected/disconnected.</li>
+                <li><strong>Tree:</strong> 
+                    <li>A hierarchical structure with nodes connected by edges, and no cycles.  
+                        <li>it is connected and acyclic.every node (except the root)has exaclty one parent.</li>
+                        <li>Has a single root node.</li>
+                        <li>Exactly n-1 edges for n nodes.</li> 
+                    <li> A unique path exists between any two nodes</li></li>
+                    </li>
+                <li><strong>Graph:</strong>
+                    <li>A collection of nodes (vertices) connected by edges, which may have cycles.</li>
+                    <li>Can be cyclic/acyclic, directed/undirected, and connected/disconnected</li>
+                    <li>  No specific root node unless defined (e.g., rooted graph).</li>
+                    <li> can have any number of edges depending on the graph type.</li>
+                    <li>  Multiple paths may exist between nodes.</li>.</li>
             </ul>
-            <p><strong>Traversals:</strong> Tree traversals include preorder, inorder, and postorder with one root node, followed by the left and right subtrees. Graph traversals include breadth-first search (BFS) using a queue and depth-first search (DFS) using a stack.</p>
+            <p><strong>Traversals:</strong></p>
+            <p>tree traversals invloved preorder,inorder and postorder traversals with one root node
+                followed by left and righ subtree while graph consist of 
+                breadth for search(bst) for queue and depth for search(dfs) for stack.</p>
         </section>
 
         <section>
             <h2>7. Sorting and Searching Algorithms</h2>
             <ul>
-                <li><strong>Bubble Sort:</strong> Repeatedly swaps adjacent elements if they are in the wrong order.</li>
-                <li><strong>Selection Sort:</strong> Selects the smallest element and places it at the beginning of the unsorted section.</li>
-                <li><strong>Merge Sort:</strong> Divide-and-conquer approach; splits the array, sorts each half, and merges them.</li>
-                <li><strong>Quick Sort:</strong> Divide-and-conquer; partitions the array around a pivot and recursively sorts partitions.</li>
-                <li><strong>Heap Sort:</strong> Builds a max-heap and extracts the largest element repeatedly.</li>
+                <li><strong>Bubble Sort:</strong> was the most basic sort developed where an array is sorted by 
+                    Repeatedly swapping adjacent elements if they are in the wrong order.</li>
+                <li><strong>Selection Sort:</strong> Select the smallest element and place it at the beginning of the unsorted section.its better than 
+                    bubble sort but not for larger data sets.</li>
+                    <li>insertion sort:intution saying the student to stand according to his height.it is better than both binary and selection sort
+                        in cases of </li>
+                <li><strong>Merge Sort:</strong> Divide-and-conquer approach; split the array, sort each half, and merge them.</li>
+                <li><strong>Quick Sort:Divide-and-conquer; partition the array around a pivot and recursively sort partitions.</strong></li>
+                <li><strong>Heap Sort:</strong>Build a max-heap and extract the largest element repeatedly..</li>
+                <li>boyer-Moore : uses bsst and gsst</li>
+
+                <li>knuth-morris-pratt uses pi table</li>
+                <li>rabin karp uses variants of hash to make search efficient</li>
             </ul>
         </section>
 
         <section>
             <h2>8. Importance of Graph Algorithms</h2>
-            <p>Graph algorithms for spanning trees and shortest paths are vital in optimizing real-world problems. Spanning tree algorithms (like Kruskal’s and Prim’s) ensure efficient network design, minimizing cost while connecting all nodes. Shortest path algorithms (such as Dijkstra’s, Bellman-Ford, and A*) find optimal paths in weighted graphs, essential for navigation, routing, and logistics. These algorithms are foundational in telecommunications, transportation, logistics, social networks, and AI.</p>
+            <p>Graph algorithms for spanning trees and shortest paths are vital in optimizing 
+                real-world problems. Spanning tree algorithms (like Kruskal’s and Prim’s) ensure 
+                efficient network design, minimizing cost while connecting all nodes. 
+                Shortest path algorithms (such as Dijkstra’s, Bellman-Ford, and A*) find optimal 
+                paths in weighted graphs, essential for navigation, routing, and logistics. 
+                Spanning trees minimize edges, and shortest path algorithms focus on distance or cost. 
+                These algorithms are foundational in telecommunications, transportation, logistics, 
+                social networks, and AI, improving efficiency, scalability, 
+                and resource allocation, making them crucial for problem-solving across industries.</p>
         </section>
 
         <section>
             <h2>9. Algorithm Design Techniques</h2>
             <ul>
-                <li><strong>Boyer-Moore:</strong> Greedy string-searching algorithm designed to find a substring in a main string by processing the pattern from right to left.</li>
-                <li><strong>KMP:</strong> Efficient string matching algorithm that avoids unnecessary re-evaluation by preprocessing the pattern and utilizing partial matching information.</li>
-                <li><strong>Rabin-Karp:</strong> Uses hashing to find all occurrences of a pattern in a text.</li>
-                <li><strong>Dijkstra's:</strong> Finds the shortest path from a source vertex to all other vertices in a weighted graph with non-negative edge weights.</li>
-                <li><strong>Floyd-Warshall:</strong> Computes shortest paths between all pairs of vertices in a weighted graph.</li>
-                <li><strong>Kruskal's:</strong> A greedy algorithm to find the minimum spanning tree (MST) of a graph.</li>
-                <li><strong>Prim's:</strong> A greedy algorithm to find the minimum spanning tree (MST), similar to Kruskal’s but it grows the MST one vertex at a time.</li>
+                <li><strong>Boyer-Moore:</strong>1. Boyer-Moore Algorithm (String Matching)
+                    The Boyer-Moore algorithm is a greedy string-searching algorithm designed to find a 
+                    substring (pattern) within a main string (text). It processes the pattern from right
+                     to left, 
+                    optimizing the search by skipping over sections of the text that cannot possibly match.</li>
+                <li><strong>KMP:</strong>The KMP algorithm is an efficient string matching algorithm that avoids unnecessary 
+                    re-evaluation of characters by preprocessing the pattern and utilizing partial 
+                    matching information.</li>
+                <li><strong>Rabin-Karp:</strong> The Rabin-Karp algorithm uses hashing to find all occurrences of a pattern in a text. 
+                    It hashes substrings of the text and compares the hashes with the hash of the pattern.</li>
+                <li><strong>Dijkstra's:</strong>Dijkstra's algorithm finds the shortest path from a source vertex to all other vertices 
+                    in a weighted graph with non-negative edge weights.
+                    </li>
+                <li><strong>Floyd-Warshall:</strong> The Floyd-Warshall algorithm computes shortest paths between all pairs of vertices in a 
+                    weighted graph.
+                    .</li>
+                <li><strong>Kruskal's:</strong> Kruskal's algorithm is a greedy algorithm used to find the minimum
+                    spanning tree (MST) of a graph.
+                   </li>
+                <li><strong>Prim's:</strong> Prim's algorithm is another greedy algorithm for finding the minimum spanning tree (MST) 
+                    of a graph, similar to Kruskal’s but it grows the MST one vertex at a time.</li>
             </ul>
         </section>
     </div>
