@@ -11,50 +11,62 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
-            display: grid;
-            place-items: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             min-height: 100vh;
             text-align: center;
         }
 
         header, section, footer {
-            width: 100%;
+            width: 90%;
             max-width: 900px;
             margin: 20px auto;
             padding: 30px;
             background: #ffffff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        header:hover, section:hover, footer:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         header {
             text-align: center;
+            position: relative;
         }
 
         header h1 {
             color: #6A4E23; /* Brown color */
             margin-bottom: 15px;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
         }
 
         header p {
             font-size: 1.1rem;
             color: #6A4E23; /* Brown color */
-            line-height: 1.6;
+            line-height: 1.8;
+            margin: 10px 0 20px;
         }
 
         header img {
             display: block;
             margin: 20px auto;
-            border-radius: 8px;
+            border-radius: 12px;
             max-width: 100%;
             height: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 4px solid #6A4E23;
         }
 
         section h2 {
             color: #5A3D2D; /* Darker brown */
             margin: 25px 0;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            text-transform: uppercase;
         }
 
         section ul {
@@ -68,12 +80,22 @@
         }
 
         section ul li {
-            margin: 10px 0;
+            margin: 15px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        section ul li::before {
+            content: '\2022';
+            position: absolute;
+            left: 0;
+            color: #D6C6A1; /* Light brown */
+            font-size: 1.5rem;
         }
 
         section p {
             font-size: 1.1rem;
-            line-height: 1.6;
+            line-height: 1.8;
             color: #6A4E23; /* Brown color */
             margin-top: 20px;
         }
@@ -91,13 +113,15 @@
             text-decoration: none;
             color: #6A4E23; /* Brown color */
             font-weight: bold;
-            padding: 8px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+            padding: 10px 25px;
+            border: 2px solid #6A4E23;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         nav ul li a:hover {
-            background-color: #D6C6A1; /* Light brown hover */
+            background-color: #6A4E23; /* Brown hover */
+            color: #ffffff;
         }
 
         footer {
@@ -107,23 +131,25 @@
         footer blockquote {
             font-style: italic;
             color: #6A4E23; /* Brown color */
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin-top: 25px;
+            line-height: 1.6;
         }
 
         a {
             display: inline-block;
             margin-top: 20px;
             padding: 12px 25px;
-            color: #fff;
+            color: #ffffff;
             background: #6A4E23; /* Brown color */
             text-decoration: none;
             border-radius: 6px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         a:hover {
             background-color: #4E3721; /* Darker brown hover */
+            transform: translateY(-3px);
         }
     </style>
 </head>
@@ -142,7 +168,7 @@
         <h2>Key Concepts Studied</h2>
         <ul>
             <li><strong>Algorithm Analysis:</strong> Big-O, Theta, and Omega notations.</li>
-            <li><strong>Data Structures:</strong> Arrays, linked lists, stacks, queues, binary search trees,AVL trees,Red Black Trees,2-3 trees,tries, graphs.</li>
+            <li><strong>Data Structures:</strong> Arrays, linked lists, stacks, queues, binary search trees, AVL trees, Red-Black Trees, 2-3 trees, tries, graphs.</li>
             <li><strong>Algorithm Design Techniques:</strong> Divide and conquer, dynamic programming, greedy algorithms, backtracking.</li>
         </ul>
 
@@ -157,7 +183,6 @@
         <p>Through the DAA course, I’ve learned to connect theoretical concepts with practical solutions, enabling me to address real-world challenges in various domains such as transportation, healthcare, and e-commerce.</p>
     </section>
 
-
     <!-- Project Section -->
     <section id="projects">
         <h2>🛠️ Projects</h2>
@@ -171,12 +196,12 @@
         <p>To learn more about the Design and Analysis of Algorithms course and its insights, click below:</p>
         <a href="index1.html">Go to DAA Course Details</a>
         <a href="businesscase.html">Business Cases</a>
-        <a href="daacourse.html"> Course Reflections(Rahul Ranjan)</a>
-        <a href="priyanshu.html"> Course Reflections(Priyanshu Khatri)</a>
+        <a href="daacourse.html">Course Reflections (Rahul Ranjan)</a>
+        <a href="priyanshu.html">Course Reflections (Priyanshu Khatri)</a>
     </section>
 
     <footer>
-        <blockquote>“The only way to do great work is to love what you do.” – Steve Jobs</blockquote>
+        <blockquote>"The only way to do great work is to love what you do." &ndash; Steve Jobs</blockquote>
     </footer>
 </body>
 </html>
