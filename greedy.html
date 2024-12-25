@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Placement Optimization - Code</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f2eb;
+            color: #5a3e36;
+        }
+
+        header {
+            background-color: #8b5e3c;
+            color: #fff;
+            padding: 2em 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin: 0.5em 0 0;
+            font-size: 1.2em;
+        }
+
+        section {
+            padding: 2em;
+            margin: 1em auto;
+            max-width: 900px;
+            background-color: #fff7ef;
+            border: 1px solid #d7b8a5;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #8b5e3c;
+            border-bottom: 2px solid #d7b8a5;
+            padding-bottom: 0.5em;
+        }
+
+        pre {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em 0;
+            background-color: #8b5e3c;
+            color: #fff;
+            border-top: 2px solid #d7b8a5;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Energy Placement Optimization - C++ Code</h1>
+        <p>View the code for optimizing energy source placement based on budget constraints.</p>
+    </header>
+
+    <section>
+        <h2>Code Implementation</h2>
+        <pre>
+#include &lt;iostream&gt;
+#include &lt;glpk.h&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int main() {
+    int n;
+    cout &lt;&lt; "Enter the number of energy sources: ";
+    cin &gt;&gt; n;
+
+    vector&lt;pair&lt;int, int&gt;&gt; energySources(n);
+
+    for (int i = 0; i &lt; n; ++i) {
+        cout &lt;&lt; "Enter energy generated (in kWh) and cost (in thousands of dollars) for energy source " &lt;&lt; i + 1 &lt;&lt; ": ";
+        cin &gt;&gt; energySources[i].first &gt;&gt; energySources[i].second;
+    }
+
+    int totalBudget;
+    cout &lt;&lt; "Enter total budget (in thousands): ";
+    cin &gt;&gt; totalBudget;
+
+    glp_prob *lp;
+    lp = glp_create_prob();
+    glp_set_prob_name(lp, "Energy Placement Optimization");
+    glp_set_obj_dir(lp, GLP_MAX);
+
+    n = energySources.size();
+
+    glp_add_cols(lp, n);
+    for (int i = 1; i &lt;= n; ++i) {
+        glp_set_col_kind(lp, i, GLP_BV);
+        glp_set_obj_coef(lp, i, energySources[i - 1].first);
+    }
+
+    glp_add_rows(lp, 1);
+    glp_set_row_bnds(lp, 1, GLP_UP, 0.0, totalBudget);
+
+    vector&lt;int&gt; costCoefficients(n, 0);
+    for (int i = 0; i &lt; n; ++i) {
+        costCoefficients[i] = energySources[i].second;
+    }
+    glp_set_mat_row(lp, 1, n, costCoefficients.data());
+
+    glp_simplex(lp, NULL);
+
+    cout &lt;&lt; "Selected Energy Sources for Maximum Energy Generation:" &lt;&lt; endl;
+    int totalEnergy = 0;
+    for (int i = 1; i &lt;= n; ++i) {
+        if (glp_get_col_prim(lp, i) &gt; 0.5) {
+            cout &lt;&lt; "Energy Source " &lt;&lt; i &lt;&lt; ": " &lt;&lt; energySources[i - 1].first &lt;&lt; " kWh, Cost: " &lt;&lt; energySources[i - 1].second &lt;&lt; " thousand dollars" &lt;&lt; endl;
+            totalEnergy += energySources[i - 1].first;
+        }
+    }
+
+    cout &lt;&lt; "Maximum energy generated: " &lt;&lt; totalEnergy &lt;&lt; " kWh" &lt;&lt; endl;
+
+    glp_delete_prob(lp);
+
+    return 0;
+}
+        </pre>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Rahul. All rights reserved.</p>
+    </footer>
+</body>
+</html>
