@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Implementations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f2eb;
+            color: #5a3e36;
+        }
+
+        header {
+            background-color: #8b5e3c;
+            color: #fff;
+            padding: 2em 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin: 0.5em 0 0;
+            font-size: 1.2em;
+        }
+
+        section {
+            padding: 2em;
+            margin: 1em auto;
+            max-width: 900px;
+            background-color: #fff7ef;
+            border: 1px solid #d7b8a5;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #8b5e3c;
+            border-bottom: 2px solid #d7b8a5;
+            padding-bottom: 0.5em;
+        }
+
+        pre {
+            background-color: #f7f0e1;
+            padding: 1em;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #d7b8a5;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em 0;
+            background-color: #8b5e3c;
+            color: #fff;
+            border-top: 2px solid #d7b8a5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Algorithm Implementations</h1>
+        <p>Explore implementations of Dijkstra's, Linear Programming (Greedy), and Prim's algorithms</p>
+    </header>
+
+    <section>
+        <h2>Dijkstra's Algorithm</h2>
+        <pre><code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;climits&gt;
+#include &lt;unordered_map&gt;
+#include &lt;set&gt;
+#include &lt;cstdlib&gt;
+
+using namespace std;
+
+struct Edge {
+    int destination;
+    int weight;
+};
+
+struct Node {
+    int vertex;
+    int distance;
+    bool operator&gt;(const Node&amp; other) const {
+        return distance &gt; other.distance;
+    }
+};
+
+class CityGraph {
+public:
+    CityGraph(int vertices) {
+        V = vertices;
+        adjList = (vector&lt;Edge&gt;*)malloc(V * sizeof(vector&lt;Edge&gt;));
+        dist = (int*)malloc(V * sizeof(int));
+        parent = (int*)malloc(V * sizeof(int));
+
+        for (int i = 0; i &lt; V; ++i) {
+            dist[i] = INT_MAX;
+            parent[i] = -1;
+        }
+    }
+
+    ~CityGraph() {
+        free(adjList);
+        free(dist);
+        free(parent);
+    }
+
+    void addEdge(int u, int v, int weight) {
+        adjList[u].push_back({v, weight});
+        adjList[v].push_back({u, weight});
+    }
+
+    void run(int start) {
+        dist[start] = 0;
+
+        priority_queue&lt;Node, vector&lt;Node&gt;, greater&lt;Node&gt;&gt; pq;
+        pq.push({start, 0});
+
+        set&lt;int&gt; visited;
+
+        while (!pq.empty()) {
+            int u = pq.top().vertex;
+            pq.pop();
+            visited.insert(u);
+
+            for (const auto&amp; edge : adjList[u]) {
+                int v = edge.destination;
+                int weight = edge.weight;
+
+                if (visited.find(v) == visited.end() &amp;&amp; dist[u] + weight &lt; dist[v]) {
+                    dist[v] = dist[u] + weight;
+                    parent[v] = u;
+                    pq.push({v, dist[v]});
+                }
+            }
+        }
+    }
+
+    void printShortestRoute(int target) {
+        if (dist[target] == INT_MAX) {
+            cout &lt;&lt; "No route found from source to " &lt;&lt; target &lt;&lt; endl;
+            return;
+        }
+
+        cout &lt;&lt; "Shortest route distance from source to " &lt;&lt; target &lt;&lt; " is " &lt;&lt; dist[target] &lt;&lt; endl;
+        cout &lt;&lt; "Route: ";
+        printPath(target);
+        cout &lt;&lt; endl;
+    }
+
+private:
+    int V;
+    vector&lt;Edge&gt;* adjList;
+    int* dist;
+    int* parent;
+
+    void printPath(int v) {
+        if (parent[v] == -1) {
+            cout &lt;&lt; v;
+            return;
+        }
+        printPath(parent[v]);
+        cout &lt;&lt; " -&gt; " &lt;&lt; v;
+    }
+};
+
+int main() {
+    int V = 6;
+    CityGraph city(V);
+
+    city.addEdge(0, 1, 10);
+    city.addEdge(0, 2, 15);
+    city.addEdge(1, 3, 12);
+    city.addEdge(1, 4, 15);
+    city.addEdge(2, 4, 10);
+    city.addEdge(3, 5, 10);
+    city.addEdge(4, 5, 5);
+
+    city.run(0);
+
+    for (int i = 0; i &lt; V; ++i) {
+        city.printShortestRoute(i);
+    }
+
+    return 0;
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Greedy (Linear Programming)</h2>
+        <pre><code>
+#include &lt;iostream&gt;
+#include &lt;glpk.h&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int main() {
+    int n;
+    cout &lt;&lt; "Enter the number of energy sources: ";
+    cin &gt;&gt; n;
+
+    vector&lt;pair&lt;int, int&gt;&gt; energySources(n);
+
+    for (int i = 0; i &lt; n; ++i) {
+        cout &lt;&lt; "Enter energy generated (in kWh) and cost (in thousands of dollars) for energy source " &lt;&lt; i + 1 &lt;&lt; ": ";
+        cin &gt;&gt; energySources[i].first &gt;&gt; energySources[i].second;
+    }
+
+    int totalBudget;
+    cout &lt;&lt; "Enter total budget (in thousands): ";
+    cin &gt;&gt; totalBudget;
+
+    glp_prob *lp;
+    lp = glp_create_prob();
+    glp_set_prob_name(lp, "Energy Placement Optimization");
+    glp_set_obj_dir(lp, GLP_MAX);
+
+    n = energySources.size();
+
+    glp_add_cols(lp, n);
+    for (int i = 1; i &lt;= n; ++i) {
+        glp_set_col_kind(lp, i, GLP_BV);
+        glp_set_obj_coef(lp, i, energySources[i - 1].first);
+    }
+
+    glp_add_rows(lp, 1);
+    glp_set_row_bnds(lp, 1, GLP_UP, 0.0, totalBudget);
+
+    vector&lt;int&gt; costCoefficients(n, 0);
+    for (int i = 0; i &lt; n; ++i) {
+        costCoefficients[i] = energySources[i].second;
+    }
+    glp_set_mat_row(lp, 1, n, costCoefficients.data());
+
+    glp_simplex(lp, NULL);
+
+    cout &lt;&lt; "Selected Energy Sources for Maximum Energy Generation:" &lt;&lt; endl;
+    int totalEnergy = 0;
+    for (int i = 1; i &lt;= n; ++i) {
+        if (glp_get_col_prim(lp, i) &gt; 0.5) {
+            cout &lt;&lt; "Energy Source " &lt;&lt; i &lt;&lt; ": " &lt;&lt; energySources[i - 1].first &lt;&lt; " kWh, Cost: " &lt;&lt; energySources[i - 1].second &lt;&lt; " thousand dollars" &lt;&lt; endl;
+            totalEnergy += energySources[i - 1].first;
+        }
+    }
+
+    cout &lt;&lt; "Maximum energy generated: " &lt;&lt; totalEnergy &lt;&lt; " kWh" &lt;&lt; endl;
+
+    glp_delete_prob(lp);
+
+    return 0;
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Prim's Algorithm</h2>
+        <pre><code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;climits&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+struct Edge {
+    int dest, weight;
+};
+
+struct Node {
+    int vertex, key;
+    bool operator&gt;(const Node &amp;other) const {
+        return key &gt; other.key;
+    }
+};
+
+class Graph {
+public:
+    Graph(int vertices) {
+        V = vertices;
+        adjList.resize(vertices);
+    }
+
+    void addEdge(int u, int v, int weight) {
+        adjList[u].push_back({v, weight});
+        adjList[v].push_back({u, weight});
+    }
+
+    void primMST() {
+        vector&lt;int&gt; key(V, INT_MAX);
+        vector&lt;int&gt; parent(V, -1);
+        vector&lt;bool&gt; inMST(V, false);
+
+        priority_queue&lt;Node, vector&lt;Node&gt;, greater&lt;Node&gt;&gt; pq;
+        key[0] = 0;
+        pq.push({0, 0});
+
+        while (!pq.empty()) {
+            int u = pq.top().vertex;
+            pq.pop();
+            inMST[u] = true;
+
+            for (const auto &amp;edge : adjList[u]) {
+                int v = edge.dest;
+                int weight = edge.weight;
+                if (!inMST[v] &amp;&amp; weight &lt; key[v]) {
+                    key[v] = weight;
+                    pq.push({v, key[v]});
+                    parent[v] = u;
+                }
+            }
+        }
+
+        printMST(parent);
+    }
+
+private:
+    int V;
+    vector&lt;vector&lt;Edge&gt;&gt; adjList;
+
+    void printMST(const vector&lt;int&gt; &amp;parent) {
+        cout &lt;&lt; "Edge \tWeight\n";
+        for (int i = 1; i &lt; V; ++i) {
+            cout &lt;&lt; parent[i] &lt;&lt; " - " &lt;&lt; i &lt;&lt; "\t" &lt;&lt; findWeight(parent[i], i) &lt;&lt; endl;
+        }
+    }
+
+    int findWeight(int u, int v) {
+        for (const auto &amp;edge : adjList[u]) {
+            if (edge.dest == v)
+                return edge.weight;
+        }
+        return 0;
+    }
+};
+
+int main() {
+    int V, E;
+    cout &lt;&lt; "Enter the number of vertices: ";
+    cin &gt;&gt; V;
+
+    cout &lt;&lt; "Enter the number of edges: ";
+    cin &gt;&gt; E;
+
+    Graph graph(V);
+
+    cout &lt;&lt; "Enter the edges (u v weight):\n";
+    for (int i = 0; i &lt; E; ++i) {
+        int u, v, weight;
+        cin &gt;&gt; u &gt;&gt; v &gt;&gt; weight;
+        graph.addEdge(u, v, weight);
+    }
+
+    cout &lt;&lt; "\nMinimum Spanning Tree using Prim's Algorithm:\n";
+    graph.primMST();
+
+    return 0;
+        </code></pre>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Algorithm Showcase. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
