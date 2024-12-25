@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prim's Algorithm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+        code {
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prim's Algorithm</h1>
+    <h2>Algorithm</h2>
+    <pre>
+<code>ALGORITHM Prim(G)
+// Prim’s algorithm to construct a minimum spanning tree
+// Input: A weighted connected graph G(V, E)
+// Output: ET, the set of edges composing the MST of G
+VT ← {v₀}
+ET ← Ø
+for i ← 1 to |V| - 1 do
+    find a minimum weight edge e* = (v*, u*) along all the edges (v, u) such that
+    v is in VT and u is in V – VT
+    VT ← VT ∪ {u*}
+    ET ← ET ∪ {e*}
+return ET
+</code>
+    </pre>
+
+    <h2>Prim's Algorithm Implementation in C++</h2>
+    <pre>
+<code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;climits&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+struct Edge {
+    int dest, weight;
+};
+
+struct Node {
+    int vertex, key;
+    bool operator&gt;(const Node &other) const {
+        return key &gt; other.key;
+    }
+};
+
+class Graph {
+public:
+    Graph(int vertices) {
+        V = vertices;
+        adjList.resize(vertices);
+    }
+
+    void addEdge(int u, int v, int weight) {
+        adjList[u].push_back({v, weight});
+        adjList[v].push_back({u, weight});
+    }
+
+    void primMST() {
+        vector&lt;int&gt; key(V, INT_MAX);
+        vector&lt;int&gt; parent(V, -1);
+        vector&lt;bool&gt; inMST(V, false);
+
+        priority_queue&lt;Node, vector&lt;Node&gt;, greater&lt;Node&gt;&gt; pq;
+        key[0] = 0;
+        pq.push({0, 0});
+
+        while (!pq.empty()) {
+            int u = pq.top().vertex;
+            pq.pop();
+            inMST[u] = true;
+
+            for (const auto &edge : adjList[u]) {
+                int v = edge.dest;
+                int weight = edge.weight;
+                if (!inMST[v] && weight &lt; key[v]) {
+                    key[v] = weight;
+                    pq.push({v, key[v]});
+                    parent[v] = u;
+                }
+            }
+        }
+
+        printMST(parent);
+    }
+
+private:
+    int V;
+    vector&lt;vector&lt;Edge&gt;&gt; adjList;
+
+    void printMST(const vector&lt;int&gt; &parent) {
+        cout &lt;&lt; "Edge \tWeight\n";
+        for (int i = 1; i &lt; V; ++i) {
+            cout &lt;&lt; parent[i] &lt;&lt; " - " &lt;&lt; i &lt;&lt; "\t" &lt;&lt; findWeight(parent[i], i) &lt;&lt; endl;
+        }
+    }
+
+    int findWeight(int u, int v) {
+        for (const auto &edge : adjList[u]) {
+            if (edge.dest == v)
+                return edge.weight;
+        }
+        return 0;
+    }
+};
+
+int main() {
+    int V, E;
+    cout &lt;&lt; "Enter the number of vertices: ";
+    cin &gt;&gt; V;
+
+    cout &lt;&lt; "Enter the number of edges: ";
+    cin &gt;&gt; E;
+
+    Graph graph(V);
+
+    cout &lt;&lt; "Enter the edges (u v weight):\n";
+    for (int i = 0; i &lt; E; ++i) {
+        int u, v, weight;
+        cin &gt;&gt; u &gt;&gt; v &gt;&gt; weight;
+        graph.addEdge(u, v, weight);
+    }
+
+    cout &lt;&lt; "\nMinimum Spanning Tree using Prim's Algorithm:\n";
+    graph.primMST();
+
+    return 0;
+}
+</code>
+    </pre>
+</body>
+</html>
