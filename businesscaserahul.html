@@ -95,12 +95,15 @@
             <dd>Efficiently route waste collection vehicles to minimize time and fuel usage while covering all city areas.</dd>
             <dt>Algorithm</dt>
             <dd>Dijkstra's Algorithm</dd>
+            <dt>Why</dt>
+            <dd>Dijkstra's Algorithm helps find the shortest path from a source node to all other nodes in a weighted graph, making it ideal for routing problems.</dd>
             <dt>Implementation Details</dt>
-            <dd>The graph was implemented using an adjacency list to represent city roads.</dd>
-            <dd>The Heap Data Structure (Min-Heap) was used for efficient execution.</dd>
-            <dd>Algorithm Efficiency: O(ElogV), where E = edges and V = nodes.</dd>
-            <dt>Links</dt>
-            <dd><a href="LINK_TO_FILE">Data</a> | <a href="LINK_TO_CODE">Code</a></dd>
+            <dd>The graph was implemented using an adjacency list to represent the city roads.</dd>
+            <dd>The Heap Data Structure (Min-Heap) was used to efficiently extract the next closest node during the execution of Dijkstra’s algorithm.</dd>
+            <dd>Algorithm Efficiency: O(ElogV), where E is the number of edges and V is the number of nodes.</dd>
+            <dd>Greedy Technique: Ensured the shortest path was chosen at each step.</dd>
+            <dt>Outcome</dt>
+            <dd>An optimal route was prepared for the waste collection vehicles using Dijkstra's Algorithm. The data generated can be found in the file HERE, and the code can be viewed HERE.</dd>
         </dl>
     </section>
 
@@ -117,12 +120,15 @@
             <dd>Suggest optimal eco-friendly travel itineraries while minimizing travel costs and ensuring heritage site preservation.</dd>
             <dt>Algorithm</dt>
             <dd>Knapsack Algorithm</dd>
+            <dt>Why</dt>
+            <dd>The Knapsack Algorithm helps in selecting a combination of items (in this case, travel destinations) that maximize value (cultural significance) while staying within constraints (budget or time).</dd>
             <dt>Implementation Details</dt>
-            <dd>Graph Representation: Costs and cultural significance assigned to destinations.</dd>
-            <dd>Dynamic Programming: Used to solve the 0/1 Knapsack problem.</dd>
-            <dd>Constraints: Traveler's budget and time.</dd>
-            <dt>Links</dt>
-            <dd><a href="LINK_TO_FILE">Data</a> | <a href="LINK_TO_CODE">Code</a></dd>
+            <dd>Graph Representation: Destinations were assigned weights (costs) and values (cultural significance).</dd>
+            <dd>Dynamic Programming: Used for solving the 0/1 Knapsack problem to select optimal combinations of destinations.</dd>
+            <dd>Constraints: Traveler's budget and time were used as limiting factors.</dd>
+            <dt>Outcome</dt>
+            <dd>An optimal itinerary was prepared using the Knapsack Algorithm. The data generated can be found in the file HERE, and the code can be viewed HERE.</dd>
+            <dd>Tourists could explore Shyamora in a cost-effective and eco-friendly manner, boosting local tourism revenue while preserving its cultural heritage.</dd>
         </dl>
     </section>
 
@@ -139,12 +145,14 @@
             <dd>Optimize placement of solar panels or hydroelectric plants to maximize energy generation and minimize cost.</dd>
             <dt>Algorithm</dt>
             <dd>Greedy Algorithm or Linear Programming</dd>
+            <dt>Why</dt>
+            <dd>Greedy Algorithms are effective for resource allocation problems, while Linear Programming ensures optimal solutions under multiple constraints.</dd>
             <dt>Implementation Details</dt>
-            <dd>Energy Needs Modeled: Data on demand and supply across city zones.</dd>
-            <dd>Greedy Technique: Used to maximize energy output per cost.</dd>
-            <dd>Linear Programming: Applied to balance constraints.</dd>
-            <dt>Links</dt>
-            <dd><a href="LINK_TO_FILE">Data</a> | <a href="LINK_TO_CODE">Code</a></dd>
+            <dd>Modeling Energy Needs: Energy demand and supply data were collected for various city zones.</dd>
+            <dd>Greedy Technique: Used to maximize energy generated per unit cost.</dd>
+            <dd>Linear Programming: Applied to balance multiple constraints like land availability and energy demand.</dd>
+            <dt>Outcome</dt>
+            <dd>This system reduced dependency on non-renewable energy sources, contributing to a greener Shyamora. The optimization data can be found in the file HERE, and the code can be viewed HERE.</dd>
         </dl>
     </section>
 
@@ -161,12 +169,15 @@
             <dd>Manage traffic efficiently and design routes for electric buses to minimize emissions and travel time.</dd>
             <dt>Algorithm</dt>
             <dd>A* Algorithm and Prim's Algorithm</dd>
+            <dt>Why</dt>
+            <dd>A* Algorithm provides dynamic and efficient route optimization using heuristics.</dd>
+            <dd>Prim's Algorithm is ideal for designing minimal spanning trees for infrastructure planning.</dd>
             <dt>Implementation Details</dt>
-            <dd>Traffic Graph: Nodes = junctions, Edges = roads with weights.</dd>
-            <dd>A* Algorithm: For real-time route optimization.</dd>
-            <dd>Prim's Algorithm: For planning electric bus charging station placement.</dd>
-            <dt>Links</dt>
-            <dd><a href="LINK_TO_FILE">Data</a> | <a href="LINK_TO_CODE">Code</a></dd>
+            <dd>Traffic Network as Graph: Nodes represented junctions, and edges represented roads with weights (travel time).</dd>
+            <dd>A* Algorithm: Used for real-time route optimization, incorporating traffic data.</dd>
+            <dd>Prim’s Algorithm: Applied to plan the minimum spanning tree for electric bus charging stations.</dd>
+            <dt>Outcome</dt>
+            <dd>The system significantly reduced commute times, traffic congestion, and greenhouse gas emissions. The optimization data can be found in the file HERE, and the code can be viewed HERE.</dd>
         </dl>
     </section>
 
