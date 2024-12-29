@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bellman-Ford Algorithm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f2eb;
+            color: #5a3e36;
+        }
+
+        header {
+            background-color: #8b5e3c;
+            color: #fff;
+            padding: 2em 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin: 0.5em 0 0;
+            font-size: 1.2em;
+        }
+
+        section {
+            padding: 2em;
+            margin: 1em auto;
+            max-width: 900px;
+            background-color: #fff7ef;
+            border: 1px solid #d7b8a5;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #8b5e3c;
+            border-bottom: 2px solid #d7b8a5;
+            padding-bottom: 0.5em;
+        }
+
+        dl {
+            margin: 0;
+        }
+
+        dt {
+            font-weight: 600;
+            color: #7a5230;
+            margin-top: 1em;
+        }
+
+        dd {
+            margin-left: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em 0;
+            background-color: #8b5e3c;
+            color: #fff;
+            border-top: 2px solid #d7b8a5;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        pre {
+            background-color: #f7f0e1;
+            padding: 1em;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #d7b8a5;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bellman-Ford Algorithm</h1>
+        <p>Shortest Path Algorithm with Negative Edge Weight Support</p>
+    </header>
+    <section>
+        <h2>Code Implementation</h2>
+        <pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;climits&gt;
+
+using namespace std;
+
+struct Edge {
+    int src, dest, weight;
+};
+
+void bellmanFord(int vertices, int edges, vector&lt;Edge&gt;&amp; graph, int start) {
+    vector&lt;int&gt; distance(vertices, INT_MAX);
+    distance[start] = 0;
+
+    for (int i = 1; i &lt;= vertices - 1; i++) {
+        for (const auto&amp; edge : graph) {
+            int u = edge.src;
+            int v = edge.dest;
+            int weight = edge.weight;
+
+            if (distance[u] != INT_MAX &amp;&amp; distance[u] + weight &lt; distance[v]) {
+                distance[v] = distance[u] + weight;
+            }
+        }
+    }
+
+    for (const auto&amp; edge : graph) {
+        int u = edge.src;
+        int v = edge.dest;
+        int weight = edge.weight;
+
+        if (distance[u] != INT_MAX &amp;&amp; distance[u] + weight &lt; distance[v]) {
+            cout &lt;&lt; "Graph contains a negative-weight cycle!" &lt;&lt; endl;
+            return;
+        }
+    }
+
+    cout &lt;&lt; "Vertex\tDistance from Source" &lt;&lt; endl;
+    for (int i = 0; i &lt; vertices; i++) {
+        cout &lt;&lt; i &lt;&lt; "\t" &lt;&lt; (distance[i] == INT_MAX ? "INF" : to_string(distance[i])) &lt;&lt; endl;
+    }
+}
+
+int main() {
+    int vertices, edges;
+    cin &gt;&gt; vertices &gt;&gt; edges;
+
+    vector&lt;Edge&gt; graph(edges);
+    for (int i = 0; i &lt; edges; i++) {
+        cin &gt;&gt; graph[i].src &gt;&gt; graph[i].dest &gt;&gt; graph[i].weight;
+    }
+
+    int start;
+    cin &gt;&gt; start;
+
+    bellmanFord(vertices, edges, graph, start);
+
+    return 0;
+}</code></pre>
+    </section>
+    <footer>
+        <p>&copy; 2024 Bellman-Ford Algorithm Demo</p>
+    </footer>
+</body>
+</html>
