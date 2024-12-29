@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kruskal's Algorithm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f2eb;
+            color: #5a3e3f;
+        }
+
+        header {
+            background-color: #8b5e3c;
+            color: #fff;
+            padding: 2em 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin: 0.5em 0 0;
+            font-size: 1.2em;
+        }
+
+        section {
+            padding: 2em;
+            margin: 1em auto;
+            max-width: 900px;
+            background-color: #fff7ef;
+            border: 1px solid #d7b8a5;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #8b5e3c;
+            border-bottom: 2px solid #d7b8a5;
+            padding-bottom: 0.5em;
+        }
+
+        pre {
+            background-color: #f7f0e1;
+            padding: 1em;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #d7b8a5;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em 0;
+            background-color: #8b5e3c;
+            color: #fff;
+            border-top: 2px solid #d7b8a5;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Kruskal's Algorithm</h1>
+        <p>Understanding and Implementing Minimum Spanning Trees</p>
+    </header>
+
+    <section>
+        <h2>Algorithm Code</h2>
+        <pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+struct Edge {
+    int src, dest, weight;
+};
+
+bool compare(Edge a, Edge b) {
+    return a.weight &lt; b.weight;
+}
+
+class DisjointSet {
+    vector&lt;int&gt; parent, rank;
+
+public:
+    DisjointSet(int n) {
+        parent.resize(n);
+        rank.resize(n, 0);
+        for (int i = 0; i &lt; n; i++) {
+            parent[i] = i;
+        }
+    }
+
+    int find(int u) {
+        if (u != parent[u]) {
+            parent[u] = find(parent[u]);
+        }
+        return parent[u];
+    }
+
+    void unite(int u, int v) {
+        int rootU = find(u);
+        int rootV = find(v);
+        if (rootU != rootV) {
+            if (rank[rootU] &lt; rank[rootV]) {
+                parent[rootU] = rootV;
+            } else if (rank[rootU] &gt; rank[rootV]) {
+                parent[rootV] = rootU;
+            } else {
+                parent[rootV] = rootU;
+                rank[rootU]++;
+            }
+        }
+    }
+};
+
+vector&lt;Edge&gt; kruskalMST(vector&lt;Edge&gt;&amp; edges, int V) {
+    sort(edges.begin(), edges.end(), compare);
+    DisjointSet ds(V);
+
+    vector&lt;Edge&gt; mst;
+    for (auto edge : edges) {
+        if (ds.find(edge.src) != ds.find(edge.dest)) {
+            mst.push_back(edge);
+            ds.unite(edge.src, edge.dest);
+        }
+    }
+    return mst;
+}
+
+int main() {
+    int V, E;
+    cout &lt;&lt; "Enter the number of nodes and edges: ";
+    cin &gt;&gt; V &gt;&gt; E;
+
+    vector&lt;Edge&gt; edges(E);
+    cout &lt;&lt; "Enter the edges (src dest weight):" &lt;&lt; endl;
+    for (int i = 0; i &lt; E; i++) {
+        cin &gt;&gt; edges[i].src &gt;&gt; edges[i].dest &gt;&gt; edges[i].weight;
+    }
+
+    vector&lt;Edge&gt; mst = kruskalMST(edges, V);
+
+    cout &lt;&lt; "Edges in the Minimum Spanning Tree:" &lt;&lt; endl;
+    for (auto edge : mst) {
+        cout &lt;&lt; edge.src &lt;&lt; " - " &lt;&lt; edge.dest &lt;&lt; " (Weight: " &lt;&lt; edge.weight &lt;&lt; ")" &lt;&lt; endl;
+    }
+
+    return 0;
+}</code></pre>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - MST Visualizer</p>
+    </footer>
+</body>
+</html>
