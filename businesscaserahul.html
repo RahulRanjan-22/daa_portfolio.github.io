@@ -74,6 +74,41 @@
         footer p {
             margin: 0;
         }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 2em 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #d7b8a5;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .graph-container {
+            text-align: center;
+            margin: 2em 0;
+        }
+
+        .graph-placeholder {
+            width: 80%;
+            height: 300px;
+            background-color: #e3d9c6;
+            display: inline-block;
+            border: 1px solid #d7b8a5;
+            line-height: 300px;
+            color: #5a3e36;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
@@ -104,17 +139,60 @@
             <dd>Greedy Technique: Ensured the shortest path was chosen at each step.</dd>
             <dt>Outcome</dt>
             <dd>An optimal route was prepared for the waste collection vehicles using Dijkstra's Algorithm.</dd>
-                <a href="dijkstra.html" target="_blank">Dijkstra's code</a>
+            <a href="dijkstra.html" target="_blank">Dijkstra's code</a>
             <dt>Why Bellman Ford</dt>
-            <dd> Bellman-Ford handles graphs with negative weights, which might arise if we associate penalties or costs with certain routes (e.g., congested or restricted zones).</dd>
-            <dd> Use Case in Waste Management:
-If certain roads are less preferred due to environmental concerns or vehicle restrictions, you can assign them negative weights.
-Drawback:
-It is slower than Dijkstra’s, with a time complexity of O(VE), but is more flexible.</dd>
-            
-         
+            <dd>Bellman-Ford handles graphs with negative weights, which might arise if we associate penalties or costs with certain routes (e.g., congested or restricted zones).</dd>
+            <dd>Use Case in Waste Management: If certain roads are less preferred due to environmental concerns or vehicle restrictions, you can assign them negative weights.</dd>
+            <dd>Drawback: It is slower than Dijkstra’s, with a time complexity of O(VE), but is more flexible.</dd>
             <a href="bellman_ford.html" target="_blank">Bellman Ford code</a>
         </dl>
+
+        <div class="table-container">
+            <h3>Waste Collection Routes Data</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Distance (in km)</th>
+                        <th>Collection Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hospital</td>
+                        <td>5</td>
+                        <td>Daily</td>
+                    </tr>
+                    <tr>
+                        <td>School</td>
+                        <td>3</td>
+                        <td>Weekly</td>
+                    </tr>
+                    <tr>
+                        <td>Industrial Area</td>
+                        <td>7</td>
+                        <td>Daily</td>
+                    </tr>
+                    <tr>
+                        <td>Residential Area</td>
+                        <td>2</td>
+                        <td>Twice a week</td>
+                    </tr>
+                    <tr>
+                        <td>Park</td>
+                        <td>6</td>
+                        <td>Weekly</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="graph-container">
+            <h3>Graph Visualization</h3>
+            <div class="graph-placeholder">
+                Graph for Waste Management Routes
+            </div>
+        </div>
     </section>
 
     <section>
@@ -134,11 +212,58 @@ It is slower than Dijkstra’s, with a time complexity of O(VE), but is more fle
             <dd>Modeling Energy Needs: Energy demand and supply data were collected for various city zones.</dd>
             <dd>Greedy Technique: Used to maximize energy generated per unit cost.</dd>
             <dd>Linear Programming: Applied to balance multiple constraints like land availability and energy demand.</dd>
-             <dd>Algorithm Efficiency: O(n^2).</dd>
+            <dd>Algorithm Efficiency: O(n^2).</dd>
             <dt>Outcome</dt>
             <dd>This system reduced dependency on non-renewable energy sources, contributing to a greener Shyamora.</dd>
             <a href="greedy.html" target="_blank">Greedy (Linear programming) code</a>
         </dl>
+
+        <div class="table-container">
+            <h3>Energy Source Placement Data</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Energy Demand (in kWh)</th>
+                        <th>Available Land (in sq km)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Industrial Area</td>
+                        <td>2000</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Residential Area</td>
+                        <td>1500</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>School</td>
+                        <td>800</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Hospital</td>
+                        <td>1200</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Park</td>
+                        <td>600</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="graph-container">
+            <h3>Energy Infrastructure Graph</h3>
+            <div class="graph-placeholder">
+                Graph for Energy Infrastructure Placement
+            </div>
+        </div>
     </section>
 
     <section>
@@ -162,27 +287,55 @@ It is slower than Dijkstra’s, with a time complexity of O(VE), but is more fle
             <dd>Algorithm Efficiency: O(ElogV), where E is the number of edges and V is the number of nodes.</dd>
             <dt>Outcome</dt>
             <dd>The system significantly reduced commute times, traffic congestion, and greenhouse gas emissions.</dd>
-             <a href="prims.html" target="_blank">Prim's code</a>
-            <dt>Another Algorithm</dt>
-            <dd>Kruskal's Algorithm</dd>
-            <dt>Why</dt>
-            <dd>Kruskal’s Algorithm is particularly efficient for graphs with fewer edges (sparse graphs) due to its approach to constructing the Minimum Spanning Tree (MST)</dd>
-            <dd> Edge-based Approach:
-Kruskal’s Algorithm processes edges rather than nodes, focusing on adding the shortest edge at each step.
-Sparse graphs have fewer edges to process, reducing computational overhead.
-
-Sorting and Disjoint Set Efficiency:
-Sorting edges by weight is 
-O(ElogE), where E is the number of edges.
-The Disjoint Set operations for cycle detection are nearly constant time due to path compression and union by rank.
-Overall complexity is 
-O(ElogV), where 
-V is the number of nodes. This is favorable for sparse graphs where 
-𝐸<<𝑉^2. 
- </dd>
-           
-            <a href="kruskals.html" target="_blank">Kruskal's code</a>
+            <a href="prims.html" target="_blank">Prim's code</a>
         </dl>
+
+        <div class="table-container">
+            <h3>Traffic Routes Data</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Travel Time (in minutes)</th>
+                        <th>Electric Bus Requirement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hospital</td>
+                        <td>10</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>School</td>
+                        <td>15</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Residential Area</td>
+                        <td>5</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Industrial Area</td>
+                        <td>20</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Park</td>
+                        <td>12</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="graph-container">
+            <h3>Transportation Network Graph</h3>
+            <div class="graph-placeholder">
+                Graph for Smart Transportation Network
+            </div>
+        </div>
     </section>
 
     <footer>
