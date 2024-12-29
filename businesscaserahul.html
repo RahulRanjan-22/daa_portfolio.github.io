@@ -133,15 +133,16 @@
             <dt>Implementation Details</dt>
             <dd>The graph was implemented using an adjacency list to represent the city roads.</dd>
             <dd>The Heap Data Structure (Min-Heap) was used to efficiently extract the next closest node during the execution of Dijkstra’s algorithm.</dd>
-            <dd>Algorithm Efficiency: O(ElogV), where E is the number of edges and V is the number of nodes.</dd>
             <dd>Greedy Technique: Ensured the shortest path was chosen at each step.</dd>
-            <dt>Outcome</dt>
-            <dd>An optimal route was prepared for the waste collection vehicles using Dijkstra's Algorithm.</dd>
+            <dt>Efficiency Analysis</dt>
+            <dd>The time complexity of Dijkstra's algorithm is O(ElogV), where E is the number of edges and V is the number of vertices (nodes). This makes it very efficient for large graphs, especially when implemented with a priority queue (Min-Heap). The algorithm works well for sparse and dense graphs, though it may not perform optimally for graphs with negative edge weights.</dd>
             <a href="dijkstra.html" target="_blank">Dijkstra's code</a>
             <dt>Why Bellman Ford</dt>
             <dd>Bellman-Ford handles graphs with negative weights, which might arise if we associate penalties or costs with certain routes (e.g., congested or restricted zones).</dd>
             <dd>Use Case in Waste Management: If certain roads are less preferred due to environmental concerns or vehicle restrictions, you can assign them negative weights.</dd>
             <dd>Drawback: It is slower than Dijkstra’s, with a time complexity of O(VE), but is more flexible.</dd>
+            <dt>Efficiency Analysis</dt>
+            <dd>Bellman-Ford has a time complexity of O(VE), where V is the number of vertices and E is the number of edges. This is less efficient than Dijkstra’s for graphs with many edges, but it is the preferred algorithm when dealing with graphs that have negative edge weights or when flexibility is required.</dd>
             <a href="bellman_ford.html" target="_blank">Bellman Ford code</a>
         </dl>
         <h2>Basic Data</h2>
@@ -192,9 +193,9 @@
             <dd>Modeling Energy Needs: Energy demand and supply data were collected for various city zones.</dd>
             <dd>Greedy Technique: Used to maximize energy generated per unit cost.</dd>
             <dd>Linear Programming: Applied to balance multiple constraints like land availability and energy demand.</dd>
-            <dd>Algorithm Efficiency: O(n^2).</dd>
-            <dt>Outcome</dt>
-            <dd>This system reduced dependency on non-renewable energy sources, contributing to a greener Shyamora.</dd>
+            <dt>Efficiency Analysis</dt>
+            <dd>Greedy algorithms typically have a time complexity of O(n log n) or O(n), depending on the specific implementation (e.g., sorting). Linear programming can be solved using methods like the Simplex algorithm, which has a worst-case time complexity of O(2^n), though practical performance is often much better due to the problem's constraints and structure.</dd>
+            <dd>The combination of these methods is well-suited for optimization problems with multiple constraints and large datasets.</dd>
             <a href="greedy.html" target="_blank">Greedy (Linear programming) code</a>
         </dl>
         <h2>Basic Data</h2>
@@ -244,28 +245,15 @@
             <dt>Implementation Details</dt>
             <dd>Traffic Network as Graph: Nodes represented junctions, and edges represented roads with weights (travel time).</dd>
             <dd>Prim’s Algorithm: Applied to plan the minimum spanning tree for electric bus charging stations.</dd>
-            <dd>Algorithm Efficiency: O(ElogV), where E is the number of edges and V is the number of nodes.</dd>
-            <dt>Outcome</dt>
-            <dd>The system significantly reduced commute times, traffic congestion, and greenhouse gas emissions.</dd>
+            <dt>Efficiency Analysis</dt>
+            <dd>Prim's Algorithm has a time complexity of O(E log V), where E is the number of edges and V is the number of nodes. It is highly efficient when the graph is dense and is typically used when all nodes need to be connected with minimal edge weights.</dd>
             <a href="prims.html" target="_blank">Prim's code</a>
               <dt>Another Algorithm</dt>
             <dd>Kruskal's Algorithm</dd>
             <dt>Why</dt>
             <dd>Kruskal’s Algorithm is particularly efficient for graphs with fewer edges (sparse graphs) due to its approach to constructing the Minimum Spanning Tree (MST)</dd>
-            <dd> Edge-based Approach:
-Kruskal’s Algorithm processes edges rather than nodes, focusing on adding the shortest edge at each step.
-Sparse graphs have fewer edges to process, reducing computational overhead.
-
-Sorting and Disjoint Set Efficiency:
-Sorting edges by weight is 
-O(ElogE), where E is the number of edges.
-The Disjoint Set operations for cycle detection are nearly constant time due to path compression and union by rank.
-Overall complexity is 
-O(ElogV), where 
-V is the number of nodes. This is favorable for sparse graphs where 
-𝐸<<𝑉^2. 
- </dd>
-           
+            <dt>Efficiency Analysis</dt>
+            <dd>Kruskal's Algorithm has a time complexity of O(E log E), where E is the number of edges. It is efficient for sparse graphs where the number of edges is much smaller than the square of the number of nodes. Sorting edges and applying union-find operations make it faster for such graphs.</dd>
             <a href="kruskals.html" target="_blank">Kruskal's code</a>
         </dl>
         <h2>Basic Data</h2>
@@ -295,7 +283,7 @@ V is the number of nodes. This is favorable for sparse graphs where
                 </tr>
             </tbody>
         </table>
-   
+    </section>
 
     <footer>
         <p>&copy; 2024 Rahul's Case Studies. All Rights Reserved.</p>
