@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,6 +74,39 @@
         footer p {
             margin: 0;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #8b5e3c;
+            color: white;
+        }
+
+        .graph-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        svg {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background: #f9f9f9;
+        }
     </style>
 </head>
 <body>
@@ -105,17 +137,40 @@
             <dd>Greedy Technique: Ensured the shortest path was chosen at each step.</dd>
             <dt>Outcome</dt>
             <dd>An optimal route was prepared for the waste collection vehicles using Dijkstra's Algorithm.</dd>
-                <a href="dijkstra.html" target="_blank">Dijkstra's code</a>
+            <a href="dijkstra.html" target="_blank">Dijkstra's code</a>
             <dt>Why Bellman Ford</dt>
-            <dd> Bellman-Ford handles graphs with negative weights, which might arise if we associate penalties or costs with certain routes (e.g., congested or restricted zones).</dd>
-            <dd> Use Case in Waste Management:
-If certain roads are less preferred due to environmental concerns or vehicle restrictions, you can assign them negative weights.
-Drawback:
-It is slower than Dijkstra’s, with a time complexity of O(VE), but is more flexible.</dd>
-            
-         
+            <dd>Bellman-Ford handles graphs with negative weights, which might arise if we associate penalties or costs with certain routes (e.g., congested or restricted zones).</dd>
+            <dd>Use Case in Waste Management: If certain roads are less preferred due to environmental concerns or vehicle restrictions, you can assign them negative weights.</dd>
+            <dd>Drawback: It is slower than Dijkstra’s, with a time complexity of O(VE), but is more flexible.</dd>
             <a href="bellman_ford.html" target="_blank">Bellman Ford code</a>
         </dl>
+        <h2>Basic Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Number of Roads</td>
+                    <td>250</td>
+                </tr>
+                <tr>
+                    <td>Number of Waste Collection Vehicles</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>Number of Nodes (City Junctions)</td>
+                    <td>150</td>
+                </tr>
+                <tr>
+                    <td>Average Distance Covered per Route (km)</td>
+                    <td>30</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 
     <section>
@@ -135,11 +190,38 @@ It is slower than Dijkstra’s, with a time complexity of O(VE), but is more fle
             <dd>Modeling Energy Needs: Energy demand and supply data were collected for various city zones.</dd>
             <dd>Greedy Technique: Used to maximize energy generated per unit cost.</dd>
             <dd>Linear Programming: Applied to balance multiple constraints like land availability and energy demand.</dd>
-             <dd>Algorithm Efficiency: O(n^2).</dd>
+            <dd>Algorithm Efficiency: O(n^2).</dd>
             <dt>Outcome</dt>
             <dd>This system reduced dependency on non-renewable energy sources, contributing to a greener Shyamora.</dd>
             <a href="greedy.html" target="_blank">Greedy (Linear programming) code</a>
         </dl>
+        <h2>Basic Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Number of Solar Panels</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Number of Hydroelectric Plants</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>Average Energy Generation per Day (kWh)</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>Energy Demand Covered (%)</td>
+                    <td>60</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 
     <section>
@@ -163,27 +245,35 @@ It is slower than Dijkstra’s, with a time complexity of O(VE), but is more fle
             <dd>Algorithm Efficiency: O(ElogV), where E is the number of edges and V is the number of nodes.</dd>
             <dt>Outcome</dt>
             <dd>The system significantly reduced commute times, traffic congestion, and greenhouse gas emissions.</dd>
-             <a href="prims.html" target="_blank">Prim's code</a>
-            <dt>Another Algorithm</dt>
-            <dd>Kruskal's Algorithm</dd>
-            <dt>Why</dt>
-            <dd>Kruskal’s Algorithm is particularly efficient for graphs with fewer edges (sparse graphs) due to its approach to constructing the Minimum Spanning Tree (MST)</dd>
-            <dd> Edge-based Approach:
-Kruskal’s Algorithm processes edges rather than nodes, focusing on adding the shortest edge at each step.
-Sparse graphs have fewer edges to process, reducing computational overhead.
-
-Sorting and Disjoint Set Efficiency:
-Sorting edges by weight is 
-O(ElogE), where E is the number of edges.
-The Disjoint Set operations for cycle detection are nearly constant time due to path compression and union by rank.
-Overall complexity is 
-O(ElogV), where 
-V is the number of nodes. This is favorable for sparse graphs where 
-𝐸<<𝑉^2. 
- </dd>
-           
-            <a href="kruskals.html" target="_blank">Kruskal's code</a>
+            <a href="prims.html" target="_blank">Prim's code</a>
         </dl>
+        <h2>Basic Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Number of Bus Routes</td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td>Number of Electric Buses</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Average Commute Time per Route (minutes)</td>
+                    <td>45</td>
+                </tr>
+                <tr>
+                    <td>Reduction in Traffic Congestion (%)</td>
+                    <td>30</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 
     <footer>
