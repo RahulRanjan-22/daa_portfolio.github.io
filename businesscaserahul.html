@@ -6,6 +6,8 @@
     <title>Business Case Studies(Rahul)</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/graphlib/dist/graphlib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/vis-network.min.js"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -96,7 +98,7 @@
             margin: 0;
         }
 
-        .chart-container {
+        .graph-container {
             position: relative;
             height: 400px;
             width: 100%;
@@ -127,7 +129,6 @@
             <dd>Dijkstra's Algorithm helps find the shortest path from a source node to all other nodes in a weighted graph, making it ideal for routing problems.</dd>
             <dt>Outcome</dt>
             <dd>An optimal route was prepared for the waste collection vehicles using Dijkstra's Algorithm.</dd>
-            <a href="dijkstra.html" target="_blank">Dijkstra's code</a>
         </dl>
 
         <!-- Table for Sustainable Waste Management -->
@@ -163,10 +164,8 @@
             </tbody>
         </table>
 
-        <!-- Chart for Waste Management Routing -->
-        <div class="chart-container">
-            <canvas id="wasteManagementChart"></canvas>
-        </div>
+        <!-- Graph for Waste Management Routing -->
+        <div class="graph-container" id="wasteManagementGraph"></div>
     </section>
 
     <section>
@@ -182,7 +181,6 @@
             <dd>Greedy Algorithm or Linear Programming</dd>
             <dt>Outcome</dt>
             <dd>This system reduced dependency on non-renewable energy sources, contributing to a greener Shyamora.</dd>
-            <a href="greedy.html" target="_blank">Greedy (Linear programming) code</a>
         </dl>
 
         <!-- Table for Renewable Energy Infrastructure -->
@@ -218,10 +216,8 @@
             </tbody>
         </table>
 
-        <!-- Chart for Renewable Energy Infrastructure -->
-        <div class="chart-container">
-            <canvas id="energyInfrastructureChart"></canvas>
-        </div>
+        <!-- Graph for Renewable Energy Infrastructure -->
+        <div class="graph-container" id="energyInfrastructureGraph"></div>
     </section>
 
     <section>
@@ -237,7 +233,6 @@
             <dd>Prim's Algorithm</dd>
             <dt>Outcome</dt>
             <dd>The system significantly reduced commute times, traffic congestion, and greenhouse gas emissions.</dd>
-            <a href="prims.html" target="_blank">Prim's code</a>
         </dl>
 
         <!-- Table for Smart Transportation System -->
@@ -273,10 +268,8 @@
             </tbody>
         </table>
 
-        <!-- Chart for Smart Transportation System -->
-        <div class="chart-container">
-            <canvas id="transportationChart"></canvas>
-        </div>
+        <!-- Graph for Smart Transportation System -->
+        <div class="graph-container" id="transportationGraph"></div>
     </section>
 
     <footer>
@@ -284,53 +277,92 @@
     </footer>
 
     <script>
-        // Waste Management Graph (Bar Chart)
-        var ctx1 = document.getElementById('wasteManagementChart').getContext('2d');
-        var wasteManagementChart = new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ['Hospital', 'School', 'Industry', 'Residential Area'],
-                datasets: [{
-                    label: 'Waste Generated (kg/day)',
-                    data: [100, 50, 200, 150],
-                    backgroundColor: '#8b5e3c',
-                    borderColor: '#5a3e36',
-                    borderWidth: 1
-                }]
+        // Graph for Waste Management Routing using MST (Minimum Spanning Tree)
+        var container1 = document.getElementById('wasteManagementGraph');
+        var data1 = {
+            nodes: [
+                { id: 1, label: 'Hospital' },
+                { id: 2, label: 'School' },
+                { id: 3, label: 'Industry' },
+                { id: 4, label: 'Residential Area' }
+            ],
+            edges: [
+                { from: 1, to: 2, label: '5 km' },
+                { from: 1, to: 3, label: '8 km' },
+                { from: 1, to: 4, label: '2 km' },
+                { from: 2, to: 3, label: '6 km' },
+                { from: 2, to: 4, label: '3 km' },
+                { from: 3, to: 4, label: '4 km' }
+            ]
+        };
+        var options1 = {
+            edges: {
+                smooth: { type: 'continuous' },
+                color: { color: '#8b5e3c' },
+            },
+            physics: {
+                enabled: false
             }
-        });
+        };
+        var network1 = new vis.Network(container1, data1, options1);
 
-        // Energy Infrastructure Graph (Line Chart)
-        var ctx2 = document.getElementById('energyInfrastructureChart').getContext('2d');
-        var energyInfrastructureChart = new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: ['Residential Area', 'School', 'Industry', 'Hospital'],
-                datasets: [{
-                    label: 'Energy Demand (kWh/day)',
-                    data: [150, 80, 400, 200],
-                    fill: false,
-                    borderColor: '#8b5e3c',
-                    tension: 0.1
-                }]
+        // Graph for Renewable Energy Infrastructure using MST (Minimum Spanning Tree)
+        var container2 = document.getElementById('energyInfrastructureGraph');
+        var data2 = {
+            nodes: [
+                { id: 1, label: 'Residential Area' },
+                { id: 2, label: 'School' },
+                { id: 3, label: 'Industry' },
+                { id: 4, label: 'Hospital' }
+            ],
+            edges: [
+                { from: 1, to: 2, label: '150 kWh' },
+                { from: 1, to: 3, label: '400 kWh' },
+                { from: 1, to: 4, label: '200 kWh' },
+                { from: 2, to: 3, label: '80 kWh' },
+                { from: 2, to: 4, label: '120 kWh' },
+                { from: 3, to: 4, label: '350 kWh' }
+            ]
+        };
+        var options2 = {
+            edges: {
+                smooth: { type: 'continuous' },
+                color: { color: '#8b5e3c' },
+            },
+            physics: {
+                enabled: false
             }
-        });
+        };
+        var network2 = new vis.Network(container2, data2, options2);
 
-        // Smart Transportation Graph (Radar Chart)
-        var ctx3 = document.getElementById('transportationChart').getContext('2d');
-        var transportationChart = new Chart(ctx3, {
-            type: 'radar',
-            data: {
-                labels: ['Hospital', 'School', 'Industry', 'Residential Area'],
-                datasets: [{
-                    label: 'Travel Time (min)',
-                    data: [10, 5, 20, 4],
-                    backgroundColor: '#8b5e3c',
-                    borderColor: '#5a3e36',
-                    borderWidth: 1
-                }]
+        // Graph for Smart Transportation System using MST (Minimum Spanning Tree)
+        var container3 = document.getElementById('transportationGraph');
+        var data3 = {
+            nodes: [
+                { id: 1, label: 'Hospital' },
+                { id: 2, label: 'School' },
+                { id: 3, label: 'Industry' },
+                { id: 4, label: 'Residential Area' }
+            ],
+            edges: [
+                { from: 1, to: 2, label: '10 min' },
+                { from: 1, to: 3, label: '20 min' },
+                { from: 1, to: 4, label: '5 min' },
+                { from: 2, to: 3, label: '15 min' },
+                { from: 2, to: 4, label: '8 min' },
+                { from: 3, to: 4, label: '12 min' }
+            ]
+        };
+        var options3 = {
+            edges: {
+                smooth: { type: 'continuous' },
+                color: { color: '#8b5e3c' },
+            },
+            physics: {
+                enabled: false
             }
-        });
+        };
+        var network3 = new vis.Network(container3, data3, options3);
     </script>
 </body>
 </html>
