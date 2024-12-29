@@ -94,8 +94,8 @@
             <dt>Problem</dt>
             <dd>Efficiently route waste collection vehicles to minimize time and fuel usage while covering all city areas.</dd>
             <dt>Algorithm</dt>
-            <dd>Dijkstra's Algorithm</dd>
-            <dt>Why</dt>
+            <dd>Dijkstra's Algorithm , Bellman Ford</dd>
+            <dt>Why Dijkstra</dt>
             <dd>Dijkstra's Algorithm helps find the shortest path from a source node to all other nodes in a weighted graph, making it ideal for routing problems.</dd>
             <dt>Implementation Details</dt>
             <dd>The graph was implemented using an adjacency list to represent the city roads.</dd>
@@ -104,7 +104,15 @@
             <dd>Greedy Technique: Ensured the shortest path was chosen at each step.</dd>
             <dt>Outcome</dt>
             <dd>An optimal route was prepared for the waste collection vehicles using Dijkstra's Algorithm.</dd>
+            <dt>Why Bellman Ford</dt>
+            <dd> Bellman-Ford handles graphs with negative weights, which might arise if we associate penalties or costs with certain routes (e.g., congested or restricted zones).</dd>
+            <dd> Use Case in Waste Management:
+If certain roads are less preferred due to environmental concerns or vehicle restrictions, you can assign them negative weights.
+Drawback:
+It is slower than Dijkstra’s, with a time complexity of O(VE), but is more flexible.</dd>
+            
              <a href="dijkstra.html" target="_blank">Dijkstra's code</a>
+            <a href="bellman_ford.html" target="_blank">Bellman Ford code</a>
         </dl>
     </section>
 
