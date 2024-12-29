@@ -72,7 +72,7 @@
 <body>
     <header>
         <h1>Algorithm Implementations</h1>
-        <p>Explore implementations of Dijkstra's, Linear Programming (Greedy), and Prim's algorithms</p>
+        <p>Explore implementations of Dijkstra's, Linear Programming (Greedy), Prim's, Bellman-Ford, Kruskal's, Heap Sort, Merge Sort, and Quick Sort algorithms</p>
     </header>
 
     <section>
@@ -253,7 +253,7 @@ int main() {
 
     cout &lt;&lt; "Selected Energy Sources for Maximum Energy Generation:" &lt;&lt; endl;
     int totalEnergy = 0;
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;&lt;= n; ++i) {
         if (glp_get_col_prim(lp, i) &gt; 0.5) {
             cout &lt;&lt; "Energy Source " &lt;&lt; i &lt;&lt; ": " &lt;&lt; energySources[i - 1].first &lt;&lt; " kWh, Cost: " &lt;&lt; energySources[i - 1].second &lt;&lt; " thousand dollars" &lt;&lt; endl;
             totalEnergy += energySources[i - 1].first;
@@ -275,15 +275,18 @@ int main() {
 #include &lt;vector&gt;
 #include &lt;climits&gt;
 #include &lt;queue&gt;
+
 using namespace std;
 
 struct Edge {
-    int dest, weight;
+    int destination;
+    int weight;
 };
 
 struct Node {
-    int vertex, key;
-    bool operator&gt;(const Node &amp;other) const {
+    int vertex;
+    int key;
+    bool operator&gt;(const Node&amp; other) const {
         return key &gt; other.key;
     }
 };
@@ -292,7 +295,16 @@ class Graph {
 public:
     Graph(int vertices) {
         V = vertices;
-        adjList.resize(vertices);
+        adjList = new vector&lt;Edge&gt;[V];
+        key = new int[V];
+        parent = new int[V];
+        visited = new bool[V];
+
+        for (int i = 0; i &lt; V; ++i) {
+            key[i] = INT_MAX;
+            parent[i] = -1;
+            visited[i] = false;
+        }
     }
 
     void addEdge(int u, int v, int weight) {
@@ -300,80 +312,443 @@ public:
         adjList[v].push_back({u, weight});
     }
 
-    void primMST() {
-        vector&lt;int&gt; key(V, INT_MAX);
-        vector&lt;int&gt; parent(V, -1);
-        vector&lt;bool&gt; inMST(V, false);
+    void primMST(int start) {
+        key[start] = 0;
 
         priority_queue&lt;Node, vector&lt;Node&gt;, greater&lt;Node&gt;&gt; pq;
-        key[0] = 0;
-        pq.push({0, 0});
+        pq.push({start, 0});
 
         while (!pq.empty()) {
             int u = pq.top().vertex;
             pq.pop();
-            inMST[u] = true;
 
-            for (const auto &amp;edge : adjList[u]) {
-                int v = edge.dest;
+            if (visited[u]) continue;
+            visited[u] = true;
+
+            for (const auto&amp; edge : adjList[u]) {
+                int v = edge.destination;
                 int weight = edge.weight;
-                if (!inMST[v] &amp;&amp; weight &lt; key[v]) {
+
+                if (!visited[v] &amp;&amp; weight &lt; key[v]) {
                     key[v] = weight;
-                    pq.push({v, key[v]});
                     parent[v] = u;
+                    pq.push({v, key[v]});
                 }
             }
         }
+    }
 
-        printMST(parent);
+    void printMST() {
+        cout &lt;&lt; "Minimum Spanning Tree (MST):" &lt;&lt; endl;
+        int totalWeight = 0;
+
+        for (int i = 1; i &lt; V; ++i) {
+            cout &lt;&lt; "Edge: " &lt;&lt; parent[i] &lt;&lt; " - " &lt;&lt; i &lt;&lt; " Weight: " &lt;&lt; adjList[i][parent[i]].weight &lt;&lt; endl;
+            totalWeight += adjList[i][parent[i]].weight;
+        }
+
+        cout &lt;&lt; "Total Weight of MST: " &lt;&lt; totalWeight &lt;&lt; endl;
     }
 
 private:
     int V;
-    vector&lt;vector&lt;Edge&gt;&gt; adjList;
+    vector&lt;Edge&gt;* adjList;
+    int* key;
+    int* parent;
+    bool* visited;
+};
 
-    void printMST(const vector&lt;int&gt; &amp;parent) {
-        cout &lt;&lt; "Edge \tWeight\n";
-        for (int i = 1; i &lt; V; ++i) {
-            cout &lt;&lt; parent[i] &lt;&lt; " - " &lt;&lt; i &lt;&lt; "\t" &lt;&lt; findWeight(parent[i], i) &lt;&lt; endl;
+int main() {
+    Graph g(6);
+
+    g.addEdge(0, 1, 10);
+    g.addEdge(0, 2, 15);
+    g.addEdge(1, 3, 12);
+    g.addEdge(1, 4, 15);
+    g.addEdge(2, 4, 10);
+    g.addEdge(3, 5, 10);
+    g.addEdge(4, 5, 5);
+
+    g.primMST(0);
+    g.printMST();
+
+    return 0;
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Bellman-Ford Code</h2>
+        <pre><code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;climits&gt;
+
+using namespace std;
+
+class BellmanFord {
+public:
+    BellmanFord(int vertices) {
+        V = vertices;
+        adjList = vector&lt;vector&lt;int&gt;&gt; (V);
+        dist = vector&lt;int&gt; (V, INT_MAX);
+    }
+
+    void addEdge(int u, int v, int weight) {
+        adjList[u].push_back({v, weight});
+    }
+
+    bool run(int start) {
+        dist[start] = 0;
+
+        for (int i = 0; i &lt; V - 1; ++i) {
+            for (int u = 0; u &lt; V; ++u) {
+                for (int v = 0; v &lt; adjList[u].size(); ++v) {
+                    int edgeWeight = adjList[u][v].second;
+                    if (dist[u] != INT_MAX &amp;&amp; dist[u] + edgeWeight &lt; dist[v]) {
+                        dist[v] = dist[u] + edgeWeight;
+                    }
+                }
+            }
+        }
+
+        for (int u = 0; u &lt; V; ++u) {
+            for (int v = 0; v &lt; adjList[u].size(); ++v) {
+                int edgeWeight = adjList[u][v].second;
+                if (dist[u] != INT_MAX &amp;&amp; dist[u] + edgeWeight &lt; dist[v]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    void printDistances() {
+        for (int i = 0; i &lt; V; ++i) {
+            cout &lt;&lt; "Distance to vertex " &lt;&lt; i &lt;&lt; ": " &lt;&lt; dist[i] &lt;&lt; endl;
         }
     }
 
-    int findWeight(int u, int v) {
-        for (const auto &amp;edge : adjList[u]) {
-            if (edge.dest == v)
-                return edge.weight;
+private:
+    int V;
+    vector&lt;vector&lt;int&gt;&gt; adjList;
+    vector&lt;int&gt; dist;
+};
+
+int main() {
+    BellmanFord bf(5);
+
+    bf.addEdge(0, 1, -1);
+    bf.addEdge(0, 2, 4);
+    bf.addEdge(1, 2, 3);
+    bf.addEdge(1, 3, 2);
+    bf.addEdge(1, 4, 2);
+    bf.addEdge(3, 2, 5);
+    bf.addEdge(3, 1, 1);
+    bf.addEdge(4, 3, -3);
+
+    if (bf.run(0)) {
+        bf.printDistances();
+    } else {
+        cout &lt;&lt; "Graph contains negative weight cycle!" &lt;&lt; endl;
+    }
+
+    return 0;
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Kruskal's Code</h2>
+        <pre><code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+struct Edge {
+    int u, v, weight;
+    bool operator&lt;(const Edge&amp; other) const {
+        return weight &lt; other.weight;
+    }
+};
+
+class DisjointSet {
+public:
+    DisjointSet(int n) {
+        parent.resize(n);
+        rank.resize(n, 0);
+        for (int i = 0; i &lt; n; ++i) {
+            parent[i] = i;
         }
-        return 0;
+    }
+
+    int find(int x) {
+        if (x != parent[x]) {
+            parent[x] = find(parent[x]);
+        }
+        return parent[x];
+    }
+
+    void unionSets(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+
+        if (rootX != rootY) {
+            if (rank[rootX] &gt; rank[rootY]) {
+                parent[rootY] = rootX;
+            } else if (rank[rootX] &lt; rank[rootY]) {
+                parent[rootX] = rootY;
+            } else {
+                parent[rootY] = rootX;
+                rank[rootX]++;
+            }
+        }
+    }
+
+private:
+    vector&lt;int&gt; parent;
+    vector&lt;int&gt; rank;
+};
+
+class Graph {
+public:
+    Graph(int vertices) {
+        V = vertices;
+    }
+
+    void addEdge(int u, int v, int weight) {
+        edges.push_back({u, v, weight});
+    }
+
+    void kruskalMST() {
+        sort(edges.begin(), edges.end());
+
+        DisjointSet ds(V);
+
+        int totalWeight = 0;
+        cout &lt;&lt; "Minimum Spanning Tree (MST):" &lt;&lt; endl;
+
+        for (auto& edge : edges) {
+            int u = edge.u;
+            int v = edge.v;
+
+            if (ds.find(u) != ds.find(v)) {
+                ds.unionSets(u, v);
+                cout &lt;&lt; "Edge: " &lt;&lt; u &lt;&lt; " - " &lt;&lt; v &lt;&lt; " Weight: " &lt;&lt; edge.weight &lt;&lt; endl;
+                totalWeight += edge.weight;
+            }
+        }
+
+        cout &lt;&lt; "Total Weight of MST: " &lt;&lt; totalWeight &lt;&lt; endl;
+    }
+
+private:
+    int V;
+    vector&lt;Edge&gt; edges;
+};
+
+int main() {
+    Graph g(6);
+
+    g.addEdge(0, 1, 10);
+    g.addEdge(0, 2, 15);
+    g.addEdge(1, 3, 12);
+    g.addEdge(1, 4, 15);
+    g.addEdge(2, 4, 10);
+    g.addEdge(3, 5, 10);
+    g.addEdge(4, 5, 5);
+
+    g.kruskalMST();
+
+    return 0;
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Heap Sort Code</h2>
+        <pre><code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class HeapSort {
+public:
+    void heapify(vector&lt;int&gt;&amp; arr, int n, int i) {
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+
+        if (left &lt; n &amp;&amp; arr[left] &gt; arr[largest]) {
+            largest = left;
+        }
+
+        if (right &lt; n &amp;&amp; arr[right] &gt; arr[largest]) {
+            largest = right;
+        }
+
+        if (largest != i) {
+            swap(arr[i], arr[largest]);
+            heapify(arr, n, largest);
+        }
+    }
+
+    void sort(vector&lt;int&gt;&amp; arr) {
+        int n = arr.size();
+
+        for (int i = n / 2 - 1; i &gt;= 0; --i) {
+            heapify(arr, n, i);
+        }
+
+        for (int i = n - 1; i &gt; 0; --i) {
+            swap(arr[0], arr[i]);
+            heapify(arr, i, 0);
+        }
     }
 };
 
 int main() {
-    int V, E;
-    cout &lt;&lt; "Enter the number of vertices: ";
-    cin &gt;&gt; V;
+    vector&lt;int&gt; arr = {12, 11, 13, 5, 6, 7};
 
-    cout &lt;&lt; "Enter the number of edges: ";
-    cin &gt;&gt; E;
+    HeapSort hs;
+    hs.sort(arr);
 
-    Graph graph(V);
+    cout &lt;&lt; "Sorted array using Heap Sort: ";
+    for (int i = 0; i &lt; arr.size(); ++i) {
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
 
-    cout &lt;&lt; "Enter the edges (u v weight):\n";
-    for (int i = 0; i &lt; E; ++i) {
-        int u, v, weight;
-        cin &gt;&gt; u &gt;&gt; v &gt;&gt; weight;
-        graph.addEdge(u, v, weight);
+    return 0;
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Merge Sort Code</h2>
+        <pre><code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class MergeSort {
+public:
+    void merge(vector&lt;int&gt;&amp; arr, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        vector&lt;int&gt; leftArr(n1);
+        vector&lt;int&gt; rightArr(n2);
+
+        for (int i = 0; i &lt; n1; ++i) {
+            leftArr[i] = arr[left + i];
+        }
+
+        for (int j = 0; j &lt; n2; ++j) {
+            rightArr[j] = arr[mid + 1 + j];
+        }
+
+        int i = 0, j = 0, k = left;
+
+        while (i &lt; n1 &amp;&amp; j &lt; n2) {
+            if (leftArr[i] &lt;= rightArr[j]) {
+                arr[k++] = leftArr[i++];
+            } else {
+                arr[k++] = rightArr[j++];
+            }
+        }
+
+        while (i &lt; n1) {
+            arr[k++] = leftArr[i++];
+        }
+
+        while (j &lt; n2) {
+            arr[k++] = rightArr[j++];
+        }
     }
 
-    cout &lt;&lt; "\nMinimum Spanning Tree using Prim's Algorithm:\n";
-    graph.primMST();
+    void sort(vector&lt;int&gt;&amp; arr, int left, int right) {
+        if (left &lt; right) {
+            int mid = left + (right - left) / 2;
+
+            sort(arr, left, mid);
+            sort(arr, mid + 1, right);
+
+            merge(arr, left, mid, right);
+        }
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {12, 11, 13, 5, 6, 7};
+
+    MergeSort ms;
+    ms.sort(arr, 0, arr.size() - 1);
+
+    cout &lt;&lt; "Sorted array using Merge Sort: ";
+    for (int i = 0; i &lt; arr.size(); ++i) {
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Quick Sort Code</h2>
+        <pre><code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class QuickSort {
+public:
+    int partition(vector&lt;int&gt;&amp; arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j &lt; high; ++j) {
+            if (arr[j] &lt; pivot) {
+                ++i;
+                swap(arr[i], arr[j]);
+            }
+        }
+
+        swap(arr[i + 1], arr[high]);
+        return i + 1;
+    }
+
+    void sort(vector&lt;int&gt;&amp; arr, int low, int high) {
+        if (low &lt; high) {
+            int pi = partition(arr, low, high);
+
+            sort(arr, low, pi - 1);
+            sort(arr, pi + 1, high);
+        }
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {12, 11, 13, 5, 6, 7};
+
+    QuickSort qs;
+    qs.sort(arr, 0, arr.size() - 1);
+
+    cout &lt;&lt; "Sorted array using Quick Sort: ";
+    for (int i = 0; i &lt; arr.size(); ++i) {
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
 
     return 0;
         </code></pre>
     </section>
 
     <footer>
-        <p>&copy; 2024 Algorithm Showcase. All Rights Reserved.</p>
+        <p>&copy; 2024 Algorithm Implementations. All rights reserved.</p>
     </footer>
 </body>
 </html>
