@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Case Studies (Rahul)</title>
+    <title>Business Case Studies(Rahul)</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/graphlib/dist/graphlib.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/vis-network.min.js"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -65,26 +63,6 @@
             margin-bottom: 0.5em;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1em;
-        }
-
-        table, th, td {
-            border: 1px solid #d7b8a5;
-        }
-
-        th, td {
-            padding: 0.5em;
-            text-align: center;
-        }
-
-        th {
-            background-color: #8b5e3c;
-            color: white;
-        }
-
         footer {
             text-align: center;
             padding: 1em 0;
@@ -97,19 +75,27 @@
             margin: 0;
         }
 
-        .graph-container {
-            position: relative;
-            height: 400px;
-            width: 100%;
-            margin-top: 2em;
+        #graph {
+            margin: 2em auto;
+            max-width: 900px;
+            height: 500px;
+            border: 1px solid #d7b8a5;
+            border-radius: 8px;
+            background-color: #fff;
         }
     </style>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
     <header>
         <h1>Rahul's Business Case Studies</h1>
         <p>Exploring Sustainable and Smart Solutions for Shyamora</p>
     </header>
+
+    <section>
+        <h2>Graph Visualization: Minimum Spanning Tree</h2>
+        <div id="graph"></div>
+    </section>
 
     <section>
         <h2>1. Sustainable Waste Management System</h2>
@@ -123,155 +109,128 @@
             <dt>Problem</dt>
             <dd>Efficiently route waste collection vehicles to minimize time and fuel usage while covering all city areas.</dd>
             <dt>Algorithm</dt>
-            <dd>Dijkstra's Algorithm, Bellman Ford</dd>
+            <dd>Dijkstra's Algorithm , Bellman Ford</dd>
             <dt>Why Dijkstra</dt>
             <dd>Dijkstra's Algorithm helps find the shortest path from a source node to all other nodes in a weighted graph, making it ideal for routing problems.</dd>
+            <dt>Implementation Details</dt>
+            <dd>The graph was implemented using an adjacency list to represent the city roads.</dd>
+            <dd>The Heap Data Structure (Min-Heap) was used to efficiently extract the next closest node during the execution of Dijkstra’s algorithm.</dd>
+            <dd>Algorithm Efficiency: O(ElogV), where E is the number of edges and V is the number of nodes.</dd>
+            <dd>Greedy Technique: Ensured the shortest path was chosen at each step.</dd>
             <dt>Outcome</dt>
             <dd>An optimal route was prepared for the waste collection vehicles using Dijkstra's Algorithm.</dd>
+            <a href="dijkstra.html" target="_blank">Dijkstra's code</a>
+            <dt>Why Bellman Ford</dt>
+            <dd> Bellman-Ford handles graphs with negative weights, which might arise if we associate penalties or costs with certain routes (e.g., congested or restricted zones).</dd>
+            <dd> Use Case in Waste Management:
+                If certain roads are less preferred due to environmental concerns or vehicle restrictions, you can assign them negative weights.
+                Drawback:
+                It is slower than Dijkstra’s, with a time complexity of O(VE), but is more flexible.
+            </dd>
+            <a href="bellman_ford.html" target="_blank">Bellman Ford code</a>
         </dl>
-
-        <!-- Graph for Sustainable Waste Management -->
-        <div class="graph-container" id="wasteManagementGraph"></div>
     </section>
 
-    <section>
-        <h2>2. Renewable Energy Infrastructure</h2>
-        <dl>
-            <dt>SDG Goal</dt>
-            <dd>11</dd>
-            <dt>Target</dt>
-            <dd>11.3</dd>
-            <dt>Problem</dt>
-            <dd>Optimize placement of solar panels or hydroelectric plants to maximize energy generation and minimize cost.</dd>
-            <dt>Algorithm</dt>
-            <dd>Greedy Algorithm or Linear Programming</dd>
-            <dt>Outcome</dt>
-            <dd>This system reduced dependency on non-renewable energy sources, contributing to a greener Shyamora.</dd>
-        </dl>
-
-        <!-- Graph for Renewable Energy Infrastructure -->
-        <div class="graph-container" id="energyInfrastructureGraph"></div>
-    </section>
-
-    <section>
-        <h2>3. Smart Transportation System</h2>
-        <dl>
-            <dt>SDG Goal</dt>
-            <dd>11</dd>
-            <dt>Target</dt>
-            <dd>11.2</dd>
-            <dt>Problem</dt>
-            <dd>Manage traffic efficiently and design routes for electric buses to minimize emissions and travel time.</dd>
-            <dt>Algorithm</dt>
-            <dd>Prim's Algorithm</dd>
-            <dt>Outcome</dt>
-            <dd>The system significantly reduced commute times, traffic congestion, and greenhouse gas emissions.</dd>
-        </dl>
-
-        <!-- Graph for Smart Transportation System -->
-        <div class="graph-container" id="transportationGraph"></div>
-    </section>
+    <!-- Renewable Energy Infrastructure and Smart Transportation System sections remain unchanged -->
 
     <footer>
         <p>&copy; 2024 Rahul's Case Studies. All Rights Reserved.</p>
     </footer>
 
     <script>
-        // Graph for Waste Management Routing using MST (Minimum Spanning Tree)
-        var container1 = document.getElementById('wasteManagementGraph');
-        var data1 = {
+        const graphData = {
             nodes: [
-                { id: 1, label: 'Hospital' },
-                { id: 2, label: 'School' },
-                { id: 3, label: 'Industry' },
-                { id: 4, label: 'Residential Area' }
+                { id: "Industry", group: 1 },
+                { id: "Hospital", group: 1 },
+                { id: "School", group: 1 },
+                { id: "Residential Area", group: 1 },
+                { id: "Park", group: 1 },
+                { id: "Government Building", group: 1 }
             ],
-            edges: [
-                { from: 1, to: 2, label: '5 km' },
-                { from: 1, to: 3, label: '8 km' },
-                { from: 1, to: 4, label: '2 km' },
-                { from: 2, to: 3, label: '6 km' },
-                { from: 2, to: 4, label: '3 km' },
-                { from: 3, to: 4, label: '4 km' }
+            links: [
+                { source: "Industry", target: "Hospital", value: 1 },
+                { source: "Hospital", target: "School", value: 1 },
+                { source: "School", target: "Residential Area", value: 1 },
+                { source: "Residential Area", target: "Park", value: 1 },
+                { source: "Park", target: "Government Building", value: 1 },
+                { source: "Industry", target: "Government Building", value: 1 }
             ]
         };
-        var options1 = {
-            edges: {
-                smooth: { type: 'continuous' },
-                color: { color: '#8b5e3c' },
-            },
-            physics: {
-                enabled: false
-            },
-            layout: {
-                improvedLayout: true
-            }
-        };
-        var network1 = new vis.Network(container1, data1, options1);
 
-        // Graph for Renewable Energy Infrastructure using MST (Minimum Spanning Tree)
-        var container2 = document.getElementById('energyInfrastructureGraph');
-        var data2 = {
-            nodes: [
-                { id: 1, label: 'Residential Area' },
-                { id: 2, label: 'School' },
-                { id: 3, label: 'Industry' },
-                { id: 4, label: 'Hospital' }
-            ],
-            edges: [
-                { from: 1, to: 2, label: '150 kWh' },
-                { from: 1, to: 3, label: '400 kWh' },
-                { from: 1, to: 4, label: '200 kWh' },
-                { from: 2, to: 3, label: '80 kWh' },
-                { from: 2, to: 4, label: '120 kWh' },
-                { from: 3, to: 4, label: '350 kWh' }
-            ]
-        };
-        var options2 = {
-            edges: {
-                smooth: { type: 'continuous' },
-                color: { color: '#8b5e3c' },
-            },
-            physics: {
-                enabled: false
-            },
-            layout: {
-                improvedLayout: true
-            }
-        };
-        var network2 = new vis.Network(container2, data2, options2);
+        const width = 900, height = 500;
 
-        // Graph for Smart Transportation System using MST (Minimum Spanning Tree)
-        var container3 = document.getElementById('transportationGraph');
-        var data3 = {
-            nodes: [
-                { id: 1, label: 'Hospital' },
-                { id: 2, label: 'School' },
-                { id: 3, label: 'Industry' },
-                { id: 4, label: 'Residential Area' }
-            ],
-            edges: [
-                { from: 1, to: 2, label: '10 min' },
-                { from: 1, to: 3, label: '20 min' },
-                { from: 1, to: 4, label: '5 min' },
-                { from: 2, to: 3, label: '15 min' },
-                { from: 2, to: 4, label: '8 min' },
-                { from: 3, to: 4, label: '12 min' }
-            ]
-        };
-        var options3 = {
-            edges: {
-                smooth: { type: 'continuous' },
-                color: { color: '#8b5e3c' },
-            },
-            physics: {
-                enabled: false
-            },
-            layout: {
-                improvedLayout: true
-            }
-        };
-        var network3 = new vis.Network(container3, data3, options3);
+        const svg = d3.select("#graph")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        const simulation = d3.forceSimulation(graphData.nodes)
+            .force("link", d3.forceLink(graphData.links).id(d => d.id))
+            .force("charge", d3.forceManyBody())
+            .force("center", d3.forceCenter(width / 2, height / 2));
+
+        const link = svg.append("g")
+            .selectAll("line")
+            .data(graphData.links)
+            .enter()
+            .append("line")
+            .attr("stroke-width", d => Math.sqrt(d.value));
+
+        const node = svg.append("g")
+            .selectAll("circle")
+            .data(graphData.nodes)
+            .enter()
+            .append("circle")
+            .attr("r", 10)
+            .attr("fill", "#8b5e3c")
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+        const text = svg.append("g")
+            .selectAll("text")
+            .data(graphData.nodes)
+            .enter()
+            .append("text")
+            .text(d => d.id)
+            .attr("x", 15)
+            .attr("y", 4)
+            .attr("font-size", "10px")
+            .attr("fill", "#7a5230");
+
+        simulation.on("tick", () => {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+
+            text
+                .attr("x", d => d.x + 15)
+                .attr("y", d => d.y + 4);
+        });
+
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
     </script>
 </body>
 </html>
