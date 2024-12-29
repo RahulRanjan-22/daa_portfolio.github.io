@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Case Studies(Rahul)</title>
+    <title>Business Case Studies (Rahul)</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/graphlib/dist/graphlib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/vis-network.min.js"></script>
     <style>
@@ -131,40 +130,7 @@
             <dd>An optimal route was prepared for the waste collection vehicles using Dijkstra's Algorithm.</dd>
         </dl>
 
-        <!-- Table for Sustainable Waste Management -->
-        <table>
-            <thead>
-                <tr>
-                    <th>Location</th>
-                    <th>Distance (km)</th>
-                    <th>Waste Generated (kg/day)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Hospital</td>
-                    <td>5</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>School</td>
-                    <td>3</td>
-                    <td>50</td>
-                </tr>
-                <tr>
-                    <td>Industry</td>
-                    <td>8</td>
-                    <td>200</td>
-                </tr>
-                <tr>
-                    <td>Residential Area</td>
-                    <td>2</td>
-                    <td>150</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- Graph for Waste Management Routing -->
+        <!-- Graph for Sustainable Waste Management -->
         <div class="graph-container" id="wasteManagementGraph"></div>
     </section>
 
@@ -182,39 +148,6 @@
             <dt>Outcome</dt>
             <dd>This system reduced dependency on non-renewable energy sources, contributing to a greener Shyamora.</dd>
         </dl>
-
-        <!-- Table for Renewable Energy Infrastructure -->
-        <table>
-            <thead>
-                <tr>
-                    <th>Location</th>
-                    <th>Energy Demand (kWh/day)</th>
-                    <th>Land Area (m²)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Residential Area</td>
-                    <td>150</td>
-                    <td>1000</td>
-                </tr>
-                <tr>
-                    <td>School</td>
-                    <td>80</td>
-                    <td>500</td>
-                </tr>
-                <tr>
-                    <td>Industry</td>
-                    <td>400</td>
-                    <td>2000</td>
-                </tr>
-                <tr>
-                    <td>Hospital</td>
-                    <td>200</td>
-                    <td>1200</td>
-                </tr>
-            </tbody>
-        </table>
 
         <!-- Graph for Renewable Energy Infrastructure -->
         <div class="graph-container" id="energyInfrastructureGraph"></div>
@@ -234,39 +167,6 @@
             <dt>Outcome</dt>
             <dd>The system significantly reduced commute times, traffic congestion, and greenhouse gas emissions.</dd>
         </dl>
-
-        <!-- Table for Smart Transportation System -->
-        <table>
-            <thead>
-                <tr>
-                    <th>Bus Stop</th>
-                    <th>Distance (km)</th>
-                    <th>Travel Time (min)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Hospital</td>
-                    <td>5</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>School</td>
-                    <td>3</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Industry</td>
-                    <td>8</td>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <td>Residential Area</td>
-                    <td>2</td>
-                    <td>4</td>
-                </tr>
-            </tbody>
-        </table>
 
         <!-- Graph for Smart Transportation System -->
         <div class="graph-container" id="transportationGraph"></div>
@@ -302,6 +202,9 @@
             },
             physics: {
                 enabled: false
+            },
+            layout: {
+                improvedLayout: true
             }
         };
         var network1 = new vis.Network(container1, data1, options1);
@@ -331,6 +234,9 @@
             },
             physics: {
                 enabled: false
+            },
+            layout: {
+                improvedLayout: true
             }
         };
         var network2 = new vis.Network(container2, data2, options2);
@@ -360,6 +266,9 @@
             },
             physics: {
                 enabled: false
+            },
+            layout: {
+                improvedLayout: true
             }
         };
         var network3 = new vis.Network(container3, data3, options3);
