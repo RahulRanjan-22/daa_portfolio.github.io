@@ -161,7 +161,24 @@ It is slower than Dijkstra’s, with a time complexity of O(VE), but is more fle
             <dd>Algorithm Efficiency: O(ElogV), where E is the number of edges and V is the number of nodes.</dd>
             <dt>Outcome</dt>
             <dd>The system significantly reduced commute times, traffic congestion, and greenhouse gas emissions.</dd>
+            <dd>Kruskal's Algorithm</dd>
+            <dt>Why</dt>
+            <dd>Kruskal’s Algorithm is particularly efficient for graphs with fewer edges (sparse graphs) due to its approach to constructing the Minimum Spanning Tree (MST)</dd>
+            <dd> Edge-based Approach:
+Kruskal’s Algorithm processes edges rather than nodes, focusing on adding the shortest edge at each step.
+Sparse graphs have fewer edges to process, reducing computational overhead.
+
+Sorting and Disjoint Set Efficiency:
+Sorting edges by weight is 
+O(ElogE), where E is the number of edges.
+The Disjoint Set operations for cycle detection are nearly constant time due to path compression and union by rank.
+Overall complexity is 
+O(ElogV), where 
+V is the number of nodes. This is favorable for sparse graphs where 
+𝐸<<𝑉^2. 
+ </dd>
             <a href="prims.html" target="_blank">Prim's code</a>
+            <a href="kruskals.html" target="_blank">Kruskal's code</a>
         </dl>
     </section>
 
