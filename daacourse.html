@@ -109,46 +109,89 @@
     <section id="problems">
         <h2>1. Problems in Nature</h2>
         <p>One of the most fascinating aspects of algorithmic design is how it draws inspiration from the natural world. For instance, repetitive patterns seen in natural processes, such as the water cycle or seasonal changes, mirror iterative approaches used in programming. Recursion, on the other hand, helps us model self-similar phenomena like fractals or tree growth by breaking them into smaller, more manageable parts. Lastly, backtracking is akin to the trial-and-error methods often employed by nature, such as navigating complex mazes or finding the best paths in dynamic environments. These methods not only make problem-solving elegant but also grounded in real-world phenomena.</p>
+        <ul>
+            <li><strong>Fractals</strong>: In nature, fractals like snowflakes and mountain ranges exhibit self-similarity, which can be modeled through recursion in programming.</li>
+            <li><strong>Water Cycle</strong>: Similar to an iterative process, the water cycle's continuous movement can be compared to a looping algorithm.</li>
+            <li><strong>Trial and Error</strong>: Just as animals learn to find food or escape predators through trial and error, backtracking algorithms explore all possibilities before finding the optimal solution.</li>
+        </ul>
     </section>
 
     <section id="efficiency">
         <h2>2. Space and Time Efficiency</h2>
         <p>The efficiency of algorithms is a cornerstone of computer science, as it directly impacts how we manage and process data. Space efficiency refers to the optimization of memory usage, ensuring that even large datasets can be handled without exhausting hardware capabilities. Time efficiency focuses on reducing execution time, which is particularly critical for applications requiring quick responses, like gaming or live streaming. Understanding the growth of computational complexity, such as constant (O(1)), logarithmic (O(log n)), linear (O(n)), and quadratic (O(n<sup>2</sup>)), allows us to make informed choices when designing solutions.</p>
+        <ul>
+            <li><strong>Constant Time (O(1))</strong>: Operations that take the same amount of time regardless of input size, like accessing an element in an array.</li>
+            <li><strong>Logarithmic Time (O(log n))</strong>: Common in binary search algorithms, where the search space is halved with each step.</li>
+            <li><strong>Linear Time (O(n))</strong>: Algorithms that examine each element in the input, like a simple loop through an array.</li>
+            <li><strong>Quadratic Time (O(n<sup>2</sup>))</strong>: Algorithms that involve nested loops, such as Bubble Sort.</li>
+        </ul>
     </section>
 
     <section id="design-principles">
         <h2>3. Design Principles</h2>
         <p>Algorithm design principles provide structured approaches to solving problems. For instance, Bubble Sort, while simple and intuitive, is most effective for small datasets due to its inefficiency with larger inputs. On the other hand, Merge Sort uses a divide-and-conquer strategy to sort data in an organized and efficient manner, making it a preferred choice for larger datasets. Similarly, Kruskal’s Algorithm stands out for constructing minimum spanning trees, a fundamental step in optimizing networks such as roads or electrical grids.</p>
+        <ul>
+            <li><strong>Bubble Sort</strong>: A simple sorting algorithm that repeatedly swaps adjacent elements. It is inefficient for large datasets with a time complexity of O(n<sup>2</sup>).</li>
+            <li><strong>Merge Sort</strong>: A more efficient sorting algorithm with a time complexity of O(n log n), ideal for large datasets due to its divide-and-conquer nature.</li>
+            <li><strong>Kruskal's Algorithm</strong>: Efficient for finding the minimum spanning tree of a graph, essential in applications like designing electrical grids or road networks.</li>
+        </ul>
     </section>
 
     <section id="data-structures">
         <h2>4. Hierarchical Data Structures</h2>
         <p>Hierarchical data structures like trees offer significant advantages in organizing and accessing data. Binary Search Trees (BSTs) excel at quick searches due to their ordered nature. Advanced variants like AVL Trees and Red-Black Trees maintain balance, ensuring consistent performance for insertions and deletions. Heaps are indispensable for scenarios requiring priority management, while Tries shine in applications involving text search and autocomplete functionality. These structures showcase the versatility of trees in solving complex problems efficiently.</p>
+        <ul>
+            <li><strong>Binary Search Trees (BST)</strong>: Provide fast search operations with an average time complexity of O(log n).</li>
+            <li><strong>AVL Trees and Red-Black Trees</strong>: Self-balancing binary search trees that guarantee O(log n) time complexity for search, insert, and delete operations.</li>
+            <li><strong>Heaps</strong>: Useful for implementing priority queues, where the highest (or lowest) priority element is always accessible in O(1) time.</li>
+            <li><strong>Tries</strong>: Efficient for tasks like autocomplete in search engines by organizing words in a tree-like structure.</li>
+        </ul>
     </section>
 
     <section id="array-queries">
         <h2>5. Array Query Algorithms</h2>
         <p>Efficiently managing range queries in arrays is essential for various applications. Fenwick Trees, for example, allow quick computation of cumulative sums, making them ideal for dynamic data scenarios. Segment Trees take this a step further by handling complex queries, such as finding maximum values or performing range updates. These algorithms find applications in areas ranging from financial analytics to gaming leaderboards, where responsiveness and accuracy are paramount.</p>
+        <ul>
+            <li><strong>Fenwick Tree</strong>: Also known as Binary Indexed Tree (BIT), used for dynamic cumulative sum queries in O(log n) time.</li>
+            <li><strong>Segment Tree</strong>: Ideal for range queries like sum, minimum, maximum, and range updates in O(log n) time.</li>
+        </ul>
     </section>
 
     <section id="trees-graphs">
         <h2>6. Trees vs Graphs</h2>
         <p>Trees and graphs, while both fundamental data structures, cater to different problem domains. Trees represent hierarchical relationships, making them ideal for applications like file systems or organizational charts. Graphs, with their interconnected nodes, are suited for modeling networks such as transportation systems or social platforms. Traversal techniques differ, with trees often relying on depth-first or breadth-first approaches, whereas graphs require additional considerations like cycle detection and pathfinding algorithms.</p>
+        <ul>
+            <li><strong>Trees</strong>: Often represent hierarchical structures like family trees or file directories.</li>
+            <li><strong>Graphs</strong>: Can represent complex networks such as social media connections or public transportation routes.</li>
+        </ul>
     </section>
 
     <section id="sorting-searching">
         <h2>7. Sorting and Searching</h2>
         <p>Sorting and searching algorithms streamline data management processes. Quick Sort stands out for its efficient partitioning method, making it a popular choice for large datasets. In contrast, Dijkstra’s Algorithm focuses on finding the shortest paths in graphs, a critical feature for navigation systems and logistics planning. Together, these algorithms form the backbone of many data-centric applications.</p>
+        <ul>
+            <li><strong>Quick Sort</strong>: An efficient sorting algorithm that divides the dataset into smaller sub-arrays and sorts them, with an average time complexity of O(n log n).</li>
+            <li><strong>Dijkstra's Algorithm</strong>: A shortest-path algorithm used in graph-based systems, essential for applications like GPS navigation.</li>
+        </ul>
     </section>
 
     <section id="graph-algorithms">
         <h2>8. Graph Algorithms</h2>
         <p>Graph algorithms play a vital role in solving network-related problems. Spanning Tree algorithms, such as Kruskal’s and Prim’s, ensure efficient connectivity with minimal edge costs, crucial for designing optimal networks. Algorithms for finding shortest paths, like Bellman-Ford and Dijkstra’s, are indispensable in fields ranging from transportation to telecommunications, where efficiency is key.</p>
+        <ul>
+            <li><strong>Spanning Tree Algorithms</strong>: Algorithms like Kruskal’s and Prim’s help in constructing minimum spanning trees, reducing the cost of connecting all nodes in a graph.</li>
+            <li><strong>Shortest Path Algorithms</strong>: Bellman-Ford and Dijkstra’s algorithms are used to find the shortest path between nodes in a graph, crucial for route optimization in navigation systems.</li>
+        </ul>
     </section>
 
     <section id="techniques">
         <h2>9. Algorithm Design Techniques</h2>
         <p>Learning algorithm design techniques has been an eye-opening experience. Divide and Conquer, for instance, simplifies large problems by breaking them into smaller subproblems, exemplified by Merge Sort. Dynamic Programming, with its ability to store intermediate results, efficiently handles overlapping subproblems, as seen in the Knapsack problem. Greedy algorithms, by making the best local choice at each step, provide quick solutions for optimization tasks like Huffman Encoding. These techniques form the foundation of innovative problem-solving in computer science.</p>
+        <ul>
+            <li><strong>Divide and Conquer</strong>: Breaks problems into smaller, manageable subproblems, making algorithms like Merge Sort more efficient.</li>
+            <li><strong>Dynamic Programming</strong>: Solves overlapping subproblems by storing solutions to avoid redundant computations, like in the Knapsack problem.</li>
+            <li><strong>Greedy Algorithms</strong>: Make the best local choice at each step, useful in optimization problems like Huffman Encoding.</li>
+        </ul>
     </section>
 
     <footer>
